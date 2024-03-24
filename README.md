@@ -24,3 +24,8 @@ Protótipos desenvolvidos no WireframePro.
 [GERENCIAR TEMAS E PERGUNTAS PARTE 1](https://wireframepro.mockflow.com/view/M4jMmA84vqb#/page/1e395dc03ace4fbaad452f7876784f43)
 
 [GERENCIAR TEMAS E PERGUNTAS PARTE 2](https://wireframepro.mockflow.com/view/MIDSsV35vqb#/page/b773fe78fb2a4da28c1ff00aa9182505)
+
+## Casos de Uso
+Diagrama de casos de uso temporário (não sei se está 100% certo kkkk)
+
+![Casos de Uso do Website](UML/Casos-de-Uso.png)
