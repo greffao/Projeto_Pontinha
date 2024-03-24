@@ -7,8 +7,8 @@
 *Universidade de São Paulo*<br>
 *Instituto de Ciências Matemáticas e de Computação*
 
-## Drive
-[Drive com os artefatos desenvolvidos no projeto](https://drive.google.com/drive/folders/1Kp4l4wmGyN-o173UJA1Z_BRWZ9riUMh0?usp=sharing)
+## Plano de Projeto
+[Plano de Projeto](https://drive.google.com/drive/folders/1Kp4l4wmGyN-o173UJA1Z_BRWZ9riUMh0?usp=sharing)
 
 ## Protótipos de Alta Fidelidade
 Protótipos desenvolvidos no WireframePro.
