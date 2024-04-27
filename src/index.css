@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Quicksand:wght@300..700&display=swap');
+
+
+/* base styles */
+* {
+  margin: 0;
+  font-family: "Quicksand";
+  color: #333;
+}
+
+/*Título*/
+
+body {
+  background-image: url(../src/teste.avif); 
+  background-size: cover;
+  background-position: center; 
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh; /* Define a altura da tela inteira */
+}
+
+.home-container p {
+  font-size: 40px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+
+  flex-direction: column;
+}
+
+.title h1 {
+  color: black;
+  font-size: 50px;
+  margin: 10px 0;
+}
+
+.title h2 {
+  color: black;
+  margin: 10px 0;
+}
+
+.content {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/*Quadrado*/
+
+.quadrado {
+  width: 600px;
+  height: 400px;
+  background-color: #f5f5dc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px; /* Define o raio de arredondamento dos cantos */
+}
+
+.quadrado p {
+  margin-bottom: auto; /* Define a margem inferior automática para a div p */
+}
+
+.quadrado button {
+  padding: 10px 20px;
+  background-color: #ff8c66;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 10px 0; /* Adiciona margem para separar os botões */
+  font-size: 25px;
+}
+
+.quadrado button:hover {
+  background-color: #d6633e;
+}
+
+.botoes-menu {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: auto;
+}
+
+.botao-canto {
+  align-self: flex-end;
+  margin-right: 20px;
+}
+
+.botao-canto button {
+  font-size: 12px;
+}
+
+/*Footer*/
+
+.footer{
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.icones {
+  display: flex;
+  flex-direction: row;
+}
+
+.icones a {
+  font-size: 30px;
+  margin-right: 20px;
+}
+
+/*Título 'Jogo do Pontinha' colorido*/
+
+.letra-j {
+  color: red;
+}
+
+.letra-o {
+  color: orange;
+}
+
+.letra-g {
+  color: blue;
+}
+
+.letra-d {
+  color: purple;
+}
+
+.letra-p {
+  color: blue;
+}
+
+.letra-n {
+  color: green;
+}
+
+.letra-t {
+  color: red;
+}
+
+.letra-i {
+  color: brown;
+}
+
+.letra-h {
+  color: magenta;
+}
+
+.letra-a {
+  color: teal;
+}
