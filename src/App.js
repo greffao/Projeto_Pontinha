@@ -7,6 +7,14 @@ import QuemSomos from './components/QuemSomos';
 import Jogo from './components/Jogo';
 import AreaCoordenacao from './components/AreaCoordenacao';
 
+/*Variável global temporária enquanto a gente
+não tem o BD*/
+const clubes = [
+    { id: 1, nome: 'Inglês', emoji: '📚', temas: ['Gramática', 'Literatura', 'Conversação'], perguntas: ['Pergunta 1', 'Pergunta 2', 'Pergunta 3'] },
+    { id: 2, nome: 'Meio Ambiente', emoji: '🌱', temas: ['Reciclagem', 'Biodiversidade', 'Conservação'], perguntas: ['Pergunta 1', 'Pergunta 2', 'Pergunta 3'] },
+    { id: 3, nome: 'Ciências', emoji: '🔬', temas: ['Física', 'Química', 'Biologia'], perguntas: ['Pergunta 1', 'Pergunta 2', 'Pergunta 3'] }
+];
+
 function App() {
     /*Definição dos estados de cada componente, usando hook 'useState'*/
     const [mostrarJogo, setMostrarJogo] = useState(false);
@@ -52,7 +60,7 @@ function App() {
                 que estou passando uma função para lidar com o click, que será usada por ele em 
                 Jogo.js
                 */}
-                {mostrarJogo && <Jogo onVoltarClick={handleVoltarClick} />}
+                {mostrarJogo && <Jogo onVoltarClick={handleVoltarClick} clubes={clubes} />}
                 {mostrarQuemSomos && <QuemSomos onVoltarClick={handleVoltarClick} />}
                 {mostrarAreaCoordenacao && <AreaCoordenacao onVoltarClick={handleVoltarClick} />}
                 {!mostrarJogo && !mostrarQuemSomos && !mostrarAreaCoordenacao && (

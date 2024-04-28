@@ -1,0 +1,41 @@
+.quadrado {
+    min-width: 600px;
+    min-height: 400px;
+    background-color: #f5f5dc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.clubes-container {
+    width: 100%;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.botao-canto {
+    margin-top: 20px;
+}
+
+.clubes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.clubes button {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff8c66;
+    color: white;
+}
