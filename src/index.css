@@ -101,6 +101,63 @@ body {
   font-size: 12px;
 }
 
+/*Retangulo*/
+
+.retangulo {
+  width: 600px;
+  /* height: 400px; */
+  background-color: #f5f5dc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px; /* Define o raio de arredondamento dos cantos */
+}
+
+.retangulo p {
+  margin-bottom: auto; /* Define a margem inferior automática para a div p */
+  margin-left: 25px; /* Define a margem inferior automática para a div p */
+  margin-right: 25px; /* Define a margem inferior automática para a div p */
+  margin-top: 40px; /* Define a margem inferior automática para a div p */
+  font-size: 25px;
+}
+
+.retangulo button {
+  padding: 10px 20px;
+  background-color: #ff8c66;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 10px 0; /* Adiciona margem para separar os botões */
+  font-size: 25px;
+}
+
+.retangulo button:hover {
+  background-color: #d6633e;
+}
+
+.botoes-menuR {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: auto;
+}
+
+.botao-cantoR {
+  align-self: flex-end;
+  margin-right: 20px;
+}
+
+.botao-cantoR button {
+  font-size: 12px;
+}
+.imagem-Qm-Somos{
+
+  height: 100%;
+  width: 100%;
+}
+
 /*Footer*/
 
 .footer{
