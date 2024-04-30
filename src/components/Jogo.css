@@ -9,6 +9,29 @@
     border-radius: 20px;
     padding: 20px;
     overflow: hidden;
+    position: relative;
+}
+
+.imagem-quadrada {
+    max-width: 50%;
+    max-height: 50%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: auto; /* Centraliza a imagem */
+}
+
+.alternativas {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* Centraliza as alternativas horizontalmente */
+    align-items: center;
+    gap: 10px; /* Espaçamento entre as alternativas */
+}
+
+.alternativas button {
+    flex: 1; /* As alternativas ocupam todo o espaço disponível na linha */
 }
 
 .clubes-container {
@@ -19,6 +42,20 @@
 
 .botao-canto {
     margin-top: 20px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.botao-nav {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding-left: 10px;
+}
+
+.botao-nav button {
+    font-size: 12px;
 }
 
 .clubes {
@@ -38,4 +75,63 @@
     border-radius: 5px;
     background-color: #ff8c66;
     color: white;
+}
+
+.mensagem-final {
+    text-align: center;
+    margin-top: 50px; /* Ajuste conforme necessário */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Ajuste conforme necessário */
+}
+
+.mensagem-final h1 {
+    font-size: 24px;
+    color: green; /* Cor dourada */
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+}
+
+.mensagem-final p {
+    font-size: 18px;
+    color: #333; /* Cor padrão */
+    margin-top: 20px; /* Espaçamento entre parágrafos */
+}
+
+.destaque {
+    font-weight: bold;
+    color: #4CAF50; /* Cor verde para destacar */
+}
+
+.letra-p {
+    color: red;
+}
+
+.letra-a {
+    color: orange; /* Amarelo mais escuro */
+}
+
+.letra-r {
+    color: #3399CC; /* Azul mais escuro */
+}
+
+.letra-a2 {
+    color: green;
+}
+
+.letra-b {
+    color: purple;
+}
+
+.letra-e {
+    color: red;
+}
+
+.letra-n {
+    color: orange; /* Amarelo mais escuro */
+}
+
+.letra-s {
+    color: #336699; /* Azul mais escuro */
 }

@@ -10,9 +10,21 @@ import AreaCoordenacao from './components/AreaCoordenacao';
 /*Variável global temporária enquanto a gente
 não tem o BD*/
 const clubes = [
-    { id: 1, nome: 'Inglês', emoji: '📚', temas: ['Gramática', 'Literatura', 'Conversação'], perguntas: ['Pergunta 1', 'Pergunta 2', 'Pergunta 3'] },
-    { id: 2, nome: 'Meio Ambiente', emoji: '🌱', temas: ['Reciclagem', 'Biodiversidade', 'Conservação'], perguntas: ['Pergunta 1', 'Pergunta 2', 'Pergunta 3'] },
-    { id: 3, nome: 'Ciências', emoji: '🔬', temas: ['Física', 'Química', 'Biologia'], perguntas: ['Pergunta 1', 'Pergunta 2', 'Pergunta 3'] }
+    { 
+        id: 1, 
+        nome: 'Inglês', 
+        emoji: '📚', 
+        temas: [
+            {
+                nome: 'Animais',
+                perguntas: [
+                    { questao: 'Qual é o nome desse animal?', alternativas: ['Horse', 'Cat', 'Dog', 'Lion'], imagemUrl: 'cavalo.jpg' },
+                    { questao: 'Qual desses animais é o mais alto?', alternativas: ['Giraffe', 'Panda', 'Fox', 'Canguru'], imagemUrl: 'grupo-animais.avif' },
+                    { questao: 'Qual animal é o mascote do Pontinha?', alternativas: ['Dinosaur', 'Cow', 'Chicken', 'Pig'], imagemUrl: 'dino-pontinha.png' }
+                ]
+            },
+        ]
+    },
 ];
 
 function App() {
