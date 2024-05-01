@@ -1,13 +1,9 @@
 .quadrado {
-    min-width: 600px;
-    min-height: 400px;
     background-color: #f5f5dc;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
-    padding: 20px;
     overflow: hidden;
     position: relative;
 }
@@ -18,20 +14,18 @@
     width: auto;
     height: auto;
     display: block;
-    margin: auto; /* Centraliza a imagem */
+    margin: auto;
 }
 
 .alternativas {
-    padding: 20px;
     display: flex;
     flex-direction: row;
-    justify-content: center; /* Centraliza as alternativas horizontalmente */
+    justify-content: center;
     align-items: center;
-    gap: 10px; /* Espaçamento entre as alternativas */
 }
 
 .alternativas button {
-    flex: 1; /* As alternativas ocupam todo o espaço disponível na linha */
+    flex: 1;
 }
 
 .clubes-container {
@@ -43,15 +37,16 @@
 .botao-canto {
     margin-top: 20px;
     position: absolute;
-    right: 0;
+    left: 0;
     bottom: 0;
+    padding-left: 10px;
 }
 
 .botao-nav {
     position: absolute;
-    left: 0;
+    right: 0;
     bottom: 0;
-    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .botao-nav button {
@@ -62,13 +57,10 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
     width: 100%;
 }
 
 .clubes button {
-    font-size: 20px;
-    padding: 10px 20px;
     margin: 5px;
     cursor: pointer;
     border: none;
@@ -79,41 +71,152 @@
 
 .mensagem-final {
     text-align: center;
-    margin-top: 50px; /* Ajuste conforme necessário */
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 300px; /* Ajuste conforme necessário */
+    height: 300px;
 }
 
-.mensagem-final h1 {
-    font-size: 24px;
-    color: green; /* Cor dourada */
-    margin-bottom: 20px; /* Espaçamento abaixo do título */
+.parabens {
+    color: green; 
+}
+
+.que-pena {
+    color: gray; 
 }
 
 .mensagem-final p {
-    font-size: 18px;
-    color: #333; /* Cor padrão */
-    margin-top: 20px; /* Espaçamento entre parágrafos */
+    color: #333;
 }
 
 .destaque {
     font-weight: bold;
-    color: #4CAF50; /* Cor verde para destacar */
+    color: #4CAF50;
 }
 
+.jogo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+  }
+  
+.jogo-container pergunta {
+    font-size: 30px;
+}
+
+/*Media Query para telas grandes*/
+@media (min-width: 769px) {
+    .quadrado {
+        border-radius: 20px;
+        padding: 20px;
+    }
+
+    .alternativas {
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .clubes-container p{
+        font-size: 30px
+    }
+
+    .clubes-container h2 {
+        font-size: 30px;
+    }
+
+    .clubes-container button {
+        font-size: 30px;
+    }
+
+    .clubes {
+        gap: 10px;
+    }
+
+    .clubes button {
+        font-size: 20px;
+        padding: 10px 20px;
+    }
+
+    .parabens {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .que-pena {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .mensagem-final p {
+        font-size: 18px;
+        margin-top: 20px;
+    }
+}
+
+/*Media Query para telas pequenas*/
+@media (max-width: 768px) {
+    .quadrado {
+        border-radius: 20px;
+        padding: 10px;
+    }
+
+    .alternativas {
+        padding: 10px;
+        gap: 5px;
+    }
+
+    .clubes-container p{
+        font-size: 15px
+    }
+
+    .clubes-container h2 {
+        font-size: 12px;
+    }
+
+    .clubes {
+        gap: 5px;
+    }
+
+    .clubes button {
+        font-size: 10px;
+        padding: 5px 10px;
+    }
+
+    .clubes-container button {
+        font-size: 15px;
+    }
+
+    .parabens {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+
+    .mensagem-final p {
+        font-size: 10px;
+        margin-top: 10px;
+    }
+
+    .mensagem-final h1 {
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+    
+}
+
+/*Título 'Parabéns' colorido*/
 .letra-p {
     color: red;
 }
 
 .letra-a {
-    color: orange; /* Amarelo mais escuro */
+    color: orange;
 }
 
 .letra-r {
-    color: #3399CC; /* Azul mais escuro */
+    color: #3399CC;
 }
 
 .letra-a2 {
@@ -129,9 +232,9 @@
 }
 
 .letra-n {
-    color: orange; /* Amarelo mais escuro */
+    color: orange;
 }
 
 .letra-s {
-    color: #336699; /* Azul mais escuro */
+    color: #336699;
 }

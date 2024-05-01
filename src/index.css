@@ -1,4 +1,11 @@
+/*Quicksand*/
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Quicksand:wght@300..700&display=swap');
+/*Kalam*/
+@import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+/*Indie Flower*/
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+/*Jersey 25*/
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Jersey+25&family=Quicksand:wght@300..700&display=swap');
 
 
 /* base styles */
@@ -20,31 +27,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh; /* Define a altura da tela inteira */
-}
-
-.home-container p {
-  font-size: 40px;
-}
-
-.title {
-  display: flex;
-  align-items: center;
-  max-width: 600px;
-  margin: 0 auto;
-
-  flex-direction: column;
 }
 
 .title h1 {
   color: black;
-  font-size: 50px;
-  margin: 10px 0;
+  margin: 0;
 }
 
 .title h2 {
-  color: black;
-  margin: 10px 0;
+  font-family: 'Indie Flower', cursive;
+}
+
+.title p {
+  font-weight: bold;
 }
 
 .content {
@@ -56,30 +51,34 @@ body {
 /*Quadrado*/
 
 .quadrado {
-  width: 600px;
-  height: 400px;
   background-color: #f5f5dc;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 20px; /* Define o raio de arredondamento dos cantos */
+  border-radius: 20px;
 }
 
-.quadrado p {
-  margin-bottom: auto; /* Define a margem inferior automática para a div p */
+.quadrado h1 {
+  margin-bottom: auto;
+  color: black;
+  font-weight: bold;
+}
+
+.quadrado h3 {
+  margin-bottom: auto;
+  color: green;
+  font-weight: bold;
+  font-family: "Jersey 25";
 }
 
 .quadrado button {
-  padding: 10px 20px;
   background-color: #ff8c66;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin: 10px 0; /* Adiciona margem para separar os botões */
-  font-size: 25px;
 }
 
 .quadrado button:hover {
@@ -97,28 +96,24 @@ body {
   margin-right: 20px;
 }
 
-.botao-canto button {
-  font-size: 12px;
-}
-
 /*Retangulo*/
 
 .retangulo {
   width: 600px;
-  /* height: 400px; */
+  height: 400px;
   background-color: #f5f5dc;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 20px; /* Define o raio de arredondamento dos cantos */
+  border-radius: 20px
 }
 
 .retangulo p {
-  margin-bottom: auto; /* Define a margem inferior automática para a div p */
-  margin-left: 25px; /* Define a margem inferior automática para a div p */
-  margin-right: 25px; /* Define a margem inferior automática para a div p */
-  margin-top: 40px; /* Define a margem inferior automática para a div p */
+  margin-bottom: auto; 
+  margin-left: 25px; 
+  margin-right: 25px; 
+  margin-top: 40px; 
   font-size: 25px;
 }
 
@@ -130,7 +125,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin: 10px 0; /* Adiciona margem para separar os botões */
+  margin: 10px 0;
   font-size: 25px;
 }
 
@@ -161,11 +156,9 @@ body {
 /*Footer*/
 
 .footer{
-  font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 50px;
 }
 
 .icones {
@@ -173,34 +166,158 @@ body {
   flex-direction: row;
 }
 
-.icones a {
-  font-size: 30px;
-  margin-right: 20px;
+/*Media Query para telas grandes*/
+@media (min-width: 769px) {
+
+  .home-container {
+    height: 50vh;
+  }
+
+  .titulo-container {
+    border: 4px solid orange; 
+    border-radius: 10px; 
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #ffdb58;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    flex-direction: column;
+  }
+
+  .title h1 {
+    font-size: 30px;
+  }
+
+  .title h2 {
+    font-size: 50px;
+  }
+
+  .quadrado {
+    width: 600px;
+    height: 400px;
+  }
+
+  .quadrado h1 {
+    font-size: 30px;
+  }
+
+  .quadrado h3 {
+    font-size: 50px;
+  }
+
+  .quadrado button {
+    padding: 10px 20px;
+    margin: 10px 0;
+  }
+
+  .botoes-menu button {
+    font-size: 30px;
+  }
+
+  .botao-canto button {
+    font-size: 12px;
+  }
+
+  .footer {
+    font-size: 20px;
+    gap: 50px;
+  }
+
+  .icones a {
+    font-size: 30px;
+    margin-right: 20px;
+  }
 }
 
-/*Título 'Jogo do Pontinha' colorido*/
+/*Media Query para telas pequenas*/
+@media (max-width: 768px) {
 
-.letra-j {
-  color: red;
+  .home-container {
+    height: 25vh;
+  }
+
+  .titulo-container {
+    border: 2px solid orange; 
+    border-radius: 5px; 
+    padding: 5px;
+    margin-bottom: 10px;
+    background-color: #ffdb58;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .title h1 {
+    font-size: 20px;
+  }
+
+  .title h2 {
+    font-size: 30px;
+  }
+
+  .title p {
+    font-size:15px;
+    margin: 0;
+  }
+
+  .quadrado {
+    width: 300px;
+    height: 200px;
+  }
+
+  .quadrado h1 {
+    font-size: 25px;
+  }
+
+  .quadrado h3 {
+    font-size: 25px;
+  }
+
+  .quadrado button {
+    padding: 5px 10px;
+    margin: 5px 0;
+    font-size: 20px;
+  }
+
+  .botoes-menu button {
+    font-size: 20px;
+  }
+  
+  .botao-canto button {
+    font-size: 10px;
+  }
+
+  .footer {
+    font-size: 15px;
+    gap: 25px;
+  }
+
+  .icones a {
+    font-size: 25px;
+    margin-right: 10px;
+  }
+}
+
+/*Título 'Pontinha' colorido*/
+
+.letra-p {
+  color: blue;
 }
 
 .letra-o {
   color: orange;
 }
 
-.letra-g {
-  color: blue;
-}
-
-.letra-d {
-  color: purple;
-}
-
-.letra-p {
-  color: blue;
-}
-
-.letra-n {
+.letra-n1 {
   color: green;
 }
 
@@ -209,13 +326,16 @@ body {
 }
 
 .letra-i {
-  color: brown;
+  color: #ffcc00;
+}
+.letra-n2 {
+  color: indigo;
 }
 
 .letra-h {
-  color: magenta;
+  color: violet;
 }
 
 .letra-a {
-  color: teal;
+  color: cyan;
 }

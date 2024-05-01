@@ -3,25 +3,11 @@ import { useState } from 'react'
 const Home = ({ onJogarClick, onQuemSomosClick, onAreaCoordenacaoClick }) => {
     return (
         <div className='home-container'>
-            <div class="quadrado">
-                <p>
-                    <span class="letra-j">J</span>
-                    <span class="letra-o">o</span>
-                    <span class="letra-g">g</span>
-                    <span class="letra-o">o</span>
-                    <span> </span>
-                    <span class="letra-d">d</span>
-                    <span class="letra-o">o</span>
-                    <span> </span>
-                    <span class="letra-p">p</span>
-                    <span class="letra-o">o</span>
-                    <span class="letra-n">n</span>
-                    <span class="letra-t">t</span>
-                    <span class="letra-i">i</span>
-                    <span class="letra-n">n</span>
-                    <span class="letra-h">h</span>
-                    <span class="letra-a">a</span>
-                </p>
+            <div className='quadrado'>
+                
+                <div className='titulo-container'>
+                    <h3>Jogo do Pontinha!</h3>
+                </div>
 
                 <div className='botoes-menu'>
                     <button onClick={onJogarClick}>Jogar</button>

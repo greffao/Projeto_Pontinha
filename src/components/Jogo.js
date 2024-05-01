@@ -83,6 +83,7 @@ const Jogo = ({ onVoltarClick, clubes }) => {
     }
 
     return (
+        <div className='jogo-container'>
         <div className='quadrado'>
             {!clubeSelecionado ? (
                 <> {/**
@@ -127,7 +128,7 @@ const Jogo = ({ onVoltarClick, clubes }) => {
                  */}
                 <div className='clubes-container'>
                     <h2>{temaSelecionado.nome}</h2>
-                    <p>{temaSelecionado.perguntas[perguntaAtual].questao}</p>
+                    <p className='perguntas'>{temaSelecionado.perguntas[perguntaAtual].questao}</p>
                     <img className='imagem-quadrada' src={require(`../temp_images/${temaSelecionado.perguntas[perguntaAtual].imagemUrl}`)} alt="Question Image" />
                     <div className='alternativas'>
                     {/**
@@ -137,7 +138,7 @@ const Jogo = ({ onVoltarClick, clubes }) => {
                         <button 
                             key={index} 
                             onClick={() => handleAlternativaClick(alt, index)} 
-                            disabled={alternativaCorreta !== -1 || alternativaIncorreta !== -1} // Desabilitar se uma resposta já foi selecionada
+                            disabled={alternativaCorreta !== -1 || alternativaIncorreta !== -1}
                             style={{ 
                                 backgroundColor: alternativaCorreta === index ? 'green' : 
                                                 alternativaIncorreta === index ? 'red' : '' 
@@ -157,6 +158,21 @@ const Jogo = ({ onVoltarClick, clubes }) => {
                     <button onClick={() => setTemaSelecionado(null)}>Voltar</button>
                 </div>
                 </>
+            ) : perguntasCorretas === 0 ? (
+                <>{/**
+                 * Seção para lamentar os 0 acertos :(
+                 */}
+                <div className='mensagem-final'>
+                    <h1>Que pena!</h1>
+                    <h1 className='que-pena'>Oh não! Você ainda está aprendendo, mas continue tentando!</h1>
+                    <p className='destaque'>Total de perguntas corretas: {perguntasCorretas}/{temaSelecionado.perguntas.length}</p>
+                    <p>Não desista! Cada erro é uma oportunidade de aprendizado. Continue explorando e se divertindo com novas perguntas e desafios.</p>
+                </div>
+                <div className='botao-canto'>
+                    <button onClick={() => {setTemaSelecionado(null);
+                                            resetJogo();}}>Voltar</button>
+                </div>
+                </>
             ) : (
                 <>{/**
                  * Seção para parabenizar o jogador
@@ -174,7 +190,7 @@ const Jogo = ({ onVoltarClick, clubes }) => {
                     <span class="letra-s">s</span>
                     🎉🌟
                 </h1>
-                    <h1>Você é um verdadeiro campeão das perguntas!</h1>
+                    <h1 className='parabens'>Você é um verdadeiro campeão das perguntas!</h1>
                     <p className='destaque'>Total de perguntas corretas: {perguntasCorretas}/{temaSelecionado.perguntas.length}</p>
                     <p>Estamos muito orgulhosos de você! Continue explorando, aprendendo e se divertindo com novas perguntas e desafios. Você é uma estrela brilhante que ilumina o caminho do conhecimento!</p>
                 </div>
@@ -184,6 +200,7 @@ const Jogo = ({ onVoltarClick, clubes }) => {
                 </div>
                 </>
             )}
+        </div>
         </div>
     );
 }
