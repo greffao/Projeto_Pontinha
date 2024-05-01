@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import QuemSomos from './components/QuemSomos';
 import Jogo from './components/Jogo';
 import AreaCoordenacao from './components/AreaCoordenacao';
+import GerenciamentoClubes from './components/GerenciamentoClubes';
 
 /*Variável global temporária enquanto a gente
 não tem o BD*/
@@ -25,6 +26,34 @@ const clubes = [
             },
         ]
     },
+    {
+        id: 2,
+        nome: 'História',
+        emoji: '🏛️',
+        temas: [
+            {
+                nome: 'Civilizações Antigas',
+                perguntas: [
+                    { questao: 'Qual civilização construiu as pirâmides?', alternativas: ['Egípcios', 'Maias', 'Incas', 'Aztecas'], imagemUrl: 'piramides-egito.webp' },
+                    { questao: 'Em que continente estava localizada a Grécia Antiga?', alternativas: ['Europa', 'Ásia', 'África', 'América'], imagemUrl: 'grecia-antiga.webp' }
+                ]
+            },
+        ]
+    },
+    {
+        id: 3,
+        nome: 'Ciências',
+        emoji: '🔬',
+        temas: [
+            {
+                nome: 'Corpo Humano',
+                perguntas: [
+                    { questao: 'Qual órgão é responsável pela respiração?', alternativas: ['Coração', 'Pulmão', 'Rim', 'Fígado'], imagemUrl: 'orgaos.webp' },
+                    { questao: 'Qual é a maior parte do corpo humano?', alternativas: ['Cabeça', 'Braço', 'Perna', 'Tronco'], imagemUrl: 'corpo-humano.wepb' }
+                ]
+            },
+        ]
+    }
 ];
 
 function App() {
@@ -32,6 +61,7 @@ function App() {
     const [mostrarJogo, setMostrarJogo] = useState(false);
     const [mostrarQuemSomos, setMostrarQuemSomos] = useState(false);
     const [mostrarAreaCoordenacao, setMostrarAreaCoordenacao] = useState(false);
+    const [mostrarGerenciamentoClubes, setMostrarGerenciamentoClubes] = useState(false);
 
     /*Funções que lidam com os eventos de click em cada botão e altera
     a visibilidade de certos componentes*/
@@ -40,25 +70,36 @@ function App() {
         setMostrarJogo(true);
         setMostrarQuemSomos(false);
         setMostrarAreaCoordenacao(false);
+        setMostrarGerenciamentoClubes(false);
     };
 
     const handleQuemSomosClick = () => {
         setMostrarJogo(false);
         setMostrarQuemSomos(true);
         setMostrarAreaCoordenacao(false);
+        setMostrarGerenciamentoClubes(false);
     };
 
     const handleAreaCoordenacaoClick = () => {
         setMostrarJogo(false);
         setMostrarQuemSomos(false);
         setMostrarAreaCoordenacao(true);
+        setMostrarGerenciamentoClubes(false);
     };
 
     const handleVoltarClick = () => {
         setMostrarJogo(false);
         setMostrarQuemSomos(false);
         setMostrarAreaCoordenacao(false);
+        setMostrarGerenciamentoClubes(false);
     };
+
+    const handleEntrarClick = () => {
+        setMostrarJogo(false);
+        setMostrarQuemSomos(false);
+        setMostrarAreaCoordenacao(false);
+        setMostrarGerenciamentoClubes(true);
+    }
 
     return (
         <div className="App">
@@ -74,12 +115,13 @@ function App() {
                 */}
                 {mostrarJogo && <Jogo onVoltarClick={handleVoltarClick} clubes={clubes} />}
                 {mostrarQuemSomos && <QuemSomos onVoltarClick={handleVoltarClick} />}
-                {mostrarAreaCoordenacao && <AreaCoordenacao onVoltarClick={handleVoltarClick} />}
-                {!mostrarJogo && !mostrarQuemSomos && !mostrarAreaCoordenacao && (
+                {mostrarAreaCoordenacao && <AreaCoordenacao onVoltarClick={handleVoltarClick} onEntrarClick={handleEntrarClick}/>}
+                {mostrarGerenciamentoClubes && <GerenciamentoClubes onVoltarClick={handleVoltarClick} clubes={clubes}/>}
+                {!mostrarJogo && !mostrarQuemSomos && !mostrarAreaCoordenacao && !mostrarGerenciamentoClubes && (
                 <Home 
                     onJogarClick={handleJogarClick} 
                     onQuemSomosClick={handleQuemSomosClick} 
-                    onAreaCoordenacaoClick={handleAreaCoordenacaoClick} 
+                    onAreaCoordenacaoClick={handleAreaCoordenacaoClick}
                 />
                 )}
             </div>
