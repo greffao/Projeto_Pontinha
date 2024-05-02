@@ -23,7 +23,8 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
             clubes.push(novoClube);  // Adiciona o novo clube ao array
             console.log('Clube adicionado:', novoClube);
             setNomeClube('');  // Limpa o campo de entrada
-            alert('Novo clube adicionado com sucesso!');
+            onEntrarClick();
+            // alert('Novo clube adicionado com sucesso!');
         } else {
             alert('Por favor, insira um nome para o clube.');  // Alerta se o campo estiver vazio
         }
@@ -49,19 +50,6 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
             </div>
             <div className='botao-cantoR'>
                 <button onClick={handleCriarClube}>Criar Novo Clube</button>
-            </div>
-        </div>
-    );
-
-
-    return (
-        <div className='quadrado'>
-            <h1 className="titulo-clubes">Novo Clube</h1>
-            <div className='botao-canto'>
-                <button onClick={onVoltarClick}>Cancelar</button>
-            </div>
-            <div className='botao-cantoR'>
-                <button onClick={onVoltarClick}>Criar Novo Clube</button>
             </div>
         </div>
     );

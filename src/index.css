@@ -394,6 +394,17 @@ body {
   margin-right: 100px;
 }
 
+.botao-acao {
+  margin-right: 15px;
+}
+
+.clube-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+}
+
 
 /* Novo Clube */
 .titulo-clubes {

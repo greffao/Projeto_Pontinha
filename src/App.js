@@ -8,6 +8,7 @@ import Jogo from './components/Jogo';
 import AreaCoordenacao from './components/AreaCoordenacao';
 import GerenciamentoClubes from './components/GerenciamentoClubes';
 import NovoClube from './components/NovoClube';
+import GerenciamentoTemas from './components/GerenciamentoTemas';
 
 /*Variável global temporária enquanto a gente
 não tem o BD*/
@@ -64,6 +65,7 @@ function App() {
     const [mostrarAreaCoordenacao, setMostrarAreaCoordenacao] = useState(false);
     const [mostrarGerenciamentoClubes, setMostrarGerenciamentoClubes] = useState(false);
     const [mostrarNovoClube, setMostrarNovoClube] = useState(false);
+    const [mostrarGerenciamentoTemas, setMostrarGerenciamentoTemas] = useState(false);
 
     /*Funções que lidam com os eventos de click em cada botão e altera
     a visibilidade de certos componentes*/
@@ -74,6 +76,7 @@ function App() {
         setMostrarAreaCoordenacao(false);
         setMostrarGerenciamentoClubes(false);
         setMostrarNovoClube(false);
+        setMostrarGerenciamentoTemas(false);
     };
 
     const handleQuemSomosClick = () => {
@@ -82,6 +85,7 @@ function App() {
         setMostrarAreaCoordenacao(false);
         setMostrarGerenciamentoClubes(false);
         setMostrarNovoClube(false);
+        setMostrarGerenciamentoTemas(false);
     };
 
     const handleAreaCoordenacaoClick = () => {
@@ -90,6 +94,7 @@ function App() {
         setMostrarAreaCoordenacao(true);
         setMostrarGerenciamentoClubes(false);
         setMostrarNovoClube(false);
+        setMostrarGerenciamentoTemas(false);
     };
 
     const handleVoltarClick = () => {
@@ -98,6 +103,7 @@ function App() {
         setMostrarAreaCoordenacao(false);
         setMostrarGerenciamentoClubes(false);
         setMostrarNovoClube(false);
+        setMostrarGerenciamentoTemas(false);
     };
 
     const handleEntrarClick = () => {
@@ -106,7 +112,8 @@ function App() {
         setMostrarAreaCoordenacao(false);
         setMostrarGerenciamentoClubes(true);
         setMostrarNovoClube(false);
-    }
+        setMostrarGerenciamentoTemas(false);
+    };
 
     const handleNovoClubeClick = () => {
         setMostrarJogo(false);
@@ -114,6 +121,16 @@ function App() {
         setMostrarAreaCoordenacao(false);
         setMostrarGerenciamentoClubes(false);
         setMostrarNovoClube(true);
+        setMostrarGerenciamentoTemas(false);
+    };
+
+    const handleEditarClubeClick = () => {
+        setMostrarJogo(false);
+        setMostrarQuemSomos(false);
+        setMostrarAreaCoordenacao(false);
+        setMostrarGerenciamentoClubes(false);
+        setMostrarNovoClube(false);
+        setMostrarGerenciamentoTemas(true);
     }
 
     return (
@@ -131,9 +148,17 @@ function App() {
                 {mostrarJogo && <Jogo onVoltarClick={handleVoltarClick} clubes={clubes} />}
                 {mostrarQuemSomos && <QuemSomos onVoltarClick={handleVoltarClick} />}
                 {mostrarAreaCoordenacao && <AreaCoordenacao onVoltarClick={handleVoltarClick} onEntrarClick={handleEntrarClick}/>}
-                {mostrarGerenciamentoClubes && <GerenciamentoClubes onVoltarClick={handleVoltarClick} onNovoClube={handleNovoClubeClick} clubes={clubes}/>}
-                {mostrarNovoClube && <NovoClube onVoltarClick={handleVoltarClick} onGere clubes={clubes}/>}
-                {!mostrarJogo && !mostrarQuemSomos && !mostrarAreaCoordenacao && !mostrarGerenciamentoClubes && !mostrarNovoClube && (
+                {mostrarGerenciamentoClubes && (
+                <GerenciamentoClubes
+                    onVoltarClick={handleVoltarClick}
+                    onNovoClube={handleNovoClubeClick}
+                    onEditarClube={handleEditarClubeClick}
+                    clubes={clubes}
+                />
+                )}
+                {mostrarNovoClube && <NovoClube onVoltarClick={handleVoltarClick} onEntrarClick={handleEntrarClick} clubes={clubes}/>}
+                {mostrarGerenciamentoTemas && <GerenciamentoTemas voltarAoClube={handleEntrarClick} clubes={clubes}/>}
+                {!mostrarJogo && !mostrarQuemSomos && !mostrarAreaCoordenacao && !mostrarGerenciamentoClubes && !mostrarNovoClube && !mostrarGerenciamentoTemas && (
                 <Home 
                     onJogarClick={handleJogarClick} 
                     onQuemSomosClick={handleQuemSomosClick} 
