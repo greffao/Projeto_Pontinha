@@ -46,7 +46,7 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
             </button>
 
             <div className='botao-canto'>
-                <button onClick={onVoltarClick}>Cancelar</button>
+                <button onClick={onEntrarClick}>Cancelar</button>
             </div>
             <div className='botao-cantoR'>
                 <button onClick={handleCriarClube}>Criar Novo Clube</button>

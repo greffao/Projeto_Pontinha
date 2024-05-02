@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import GerenciamentoPerguntas from './GerenciamentoPerguntas';
 
 const GerenciamentoTemas = ({ clubeInicial, clubes, setClubes, voltarAoClube, onNovoTema }) => {
     const [clube, setClube] = useState(clubeInicial);
     const [clubesLocais, setClubesLocais] = useState(clubes);
+    const [temaSelecionado, setTemaSelecionado] = useState(null);
+
+    const handleSelecionarTema = tema => {
+        console.log(tema);
+        setTemaSelecionado(tema);
+    }
 
     useEffect(() => {
         // Atualiza o estado local do clube sempre que o clube inicial mudar
@@ -27,6 +34,10 @@ const GerenciamentoTemas = ({ clubeInicial, clubes, setClubes, voltarAoClube, on
         setClubesLocais(clubesAtualizados);
     };
 
+    if(temaSelecionado) {
+        return <GerenciamentoPerguntas temaInicial={temaSelecionado} voltarAoTema={() => setTemaSelecionado(null)}/>;
+    }
+
     return (
         <div className='quadrado'>
             <h1 className="titulo-clubes">Temas do Clube: {clube.nome}</h1>
@@ -35,7 +46,7 @@ const GerenciamentoTemas = ({ clubeInicial, clubes, setClubes, voltarAoClube, on
                     <div key={tema.id} className="clube-container">
                         <span>{tema.nome}</span>
                         <div>
-                            <button style={{ marginRight: '15px' }} onClick={() => console.log("Editei")}>Editar</button>
+                            <button style={{ marginRight: '15px' }} onClick={() => handleSelecionarTema(tema)}>Editar</button>
                             <button onClick={() => excluirTema(tema.id)}>Excluir Tema</button>
                         </div>
                     </div>
