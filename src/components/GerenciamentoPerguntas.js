@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import NovaPergunta from './NovaPergunta';
 
 const GerenciamentoPerguntas = ({ temaInicial, voltarAoTema }) => {
+    const [onCriarPergunta, setCriarPergunta] = useState(null);
+
+    const handleNovaPergunta = tema => {
+        setCriarPergunta(tema);
+    }
+
+    if(onCriarPergunta) {
+        return <NovaPergunta onVoltarClick={() => setCriarPergunta(null)} tema/>;
+    }
 
     return (
         <div className='quadrado'>
@@ -22,7 +32,7 @@ const GerenciamentoPerguntas = ({ temaInicial, voltarAoTema }) => {
                 <button onClick={voltarAoTema}>Voltar aos Temas</button>
             </div>
             <div className='botao-cantoR'>
-                <button onClick={() => console.log("Novo tema")}>Nova Pergunta</button>
+                <button onClick={() => handleNovaPergunta(temaInicial)}>Nova Pergunta</button>
             </div>
         </div>
     );
