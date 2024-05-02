@@ -7,6 +7,7 @@ import QuemSomos from './components/QuemSomos';
 import Jogo from './components/Jogo';
 import AreaCoordenacao from './components/AreaCoordenacao';
 import GerenciamentoClubes from './components/GerenciamentoClubes';
+import NovoClube from './components/NovoClube';
 
 /*Variável global temporária enquanto a gente
 não tem o BD*/
@@ -53,7 +54,7 @@ const clubes = [
                 ]
             },
         ]
-    }
+    },
 ];
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
     const [mostrarQuemSomos, setMostrarQuemSomos] = useState(false);
     const [mostrarAreaCoordenacao, setMostrarAreaCoordenacao] = useState(false);
     const [mostrarGerenciamentoClubes, setMostrarGerenciamentoClubes] = useState(false);
+    const [mostrarNovoClube, setMostrarNovoClube] = useState(false);
 
     /*Funções que lidam com os eventos de click em cada botão e altera
     a visibilidade de certos componentes*/
@@ -71,6 +73,7 @@ function App() {
         setMostrarQuemSomos(false);
         setMostrarAreaCoordenacao(false);
         setMostrarGerenciamentoClubes(false);
+        setMostrarNovoClube(false);
     };
 
     const handleQuemSomosClick = () => {
@@ -78,6 +81,7 @@ function App() {
         setMostrarQuemSomos(true);
         setMostrarAreaCoordenacao(false);
         setMostrarGerenciamentoClubes(false);
+        setMostrarNovoClube(false);
     };
 
     const handleAreaCoordenacaoClick = () => {
@@ -85,6 +89,7 @@ function App() {
         setMostrarQuemSomos(false);
         setMostrarAreaCoordenacao(true);
         setMostrarGerenciamentoClubes(false);
+        setMostrarNovoClube(false);
     };
 
     const handleVoltarClick = () => {
@@ -92,6 +97,7 @@ function App() {
         setMostrarQuemSomos(false);
         setMostrarAreaCoordenacao(false);
         setMostrarGerenciamentoClubes(false);
+        setMostrarNovoClube(false);
     };
 
     const handleEntrarClick = () => {
@@ -99,6 +105,15 @@ function App() {
         setMostrarQuemSomos(false);
         setMostrarAreaCoordenacao(false);
         setMostrarGerenciamentoClubes(true);
+        setMostrarNovoClube(false);
+    }
+
+    const handleNovoClubeClick = () => {
+        setMostrarJogo(false);
+        setMostrarQuemSomos(false);
+        setMostrarAreaCoordenacao(false);
+        setMostrarGerenciamentoClubes(false);
+        setMostrarNovoClube(true);
     }
 
     return (
@@ -116,8 +131,9 @@ function App() {
                 {mostrarJogo && <Jogo onVoltarClick={handleVoltarClick} clubes={clubes} />}
                 {mostrarQuemSomos && <QuemSomos onVoltarClick={handleVoltarClick} />}
                 {mostrarAreaCoordenacao && <AreaCoordenacao onVoltarClick={handleVoltarClick} onEntrarClick={handleEntrarClick}/>}
-                {mostrarGerenciamentoClubes && <GerenciamentoClubes onVoltarClick={handleVoltarClick} clubes={clubes}/>}
-                {!mostrarJogo && !mostrarQuemSomos && !mostrarAreaCoordenacao && !mostrarGerenciamentoClubes && (
+                {mostrarGerenciamentoClubes && <GerenciamentoClubes onVoltarClick={handleVoltarClick} onNovoClube={handleNovoClubeClick} clubes={clubes}/>}
+                {mostrarNovoClube && <NovoClube onVoltarClick={handleVoltarClick} onGere clubes={clubes}/>}
+                {!mostrarJogo && !mostrarQuemSomos && !mostrarAreaCoordenacao && !mostrarGerenciamentoClubes && !mostrarNovoClube && (
                 <Home 
                     onJogarClick={handleJogarClick} 
                     onQuemSomosClick={handleQuemSomosClick} 

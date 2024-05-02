@@ -377,3 +377,37 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+.lista-clubes {
+  width: 100%; /* ou uma largura específica conforme necessário */
+  max-height: 80vh; /* ajuste conforme necessário baseado no layout da página */
+  overflow-y: auto; /* habilita a scrollbar vertical se o conteúdo exceder o max-height */
+  margin: 20px 0; /* espaço ao redor da lista */
+  margin-bottom: auto;
+}
+
+.label, .input-field {
+  width: 100%; /* Ajuste conforme necessário */
+}
+
+.espaco-botao {
+  margin-right: 100px;
+}
+
+
+/* Novo Clube */
+.titulo-clubes {
+  margin-bottom: 20px;
+}
+
+.input-clube {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.botao-imagem {
+  width: 25%;
+  padding: 10px;
+  margin-bottom: auto !important;
+}
