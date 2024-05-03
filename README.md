@@ -1,7 +1,7 @@
 # Projeto Pontinha
 
-*Lucas Greff Meneses - 13671615*
-*Yuri Fernandes Pereira - 13730127*
+*Lucas Greff Meneses - 13671615* <br>
+*Yuri Fernandes Pereira - 13730127* <br>
 
 <br>
 
