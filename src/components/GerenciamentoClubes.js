@@ -30,26 +30,27 @@ const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, onEditarClube, clubes
     }
 
     return (
-        <div className='quadrado'>
-            <h1 className="titulo-clubes">Clubes</h1>
-            <div className='lista-clubes'>
-                {clubes.map((clube) => (
-                    <div key={clube.id} className="clube-container">
-                        <span>{clube.emoji} {clube.nome}</span>
-                        <div>
-                            {/* <button style={{ marginRight: '15px' }} onClick={onEditarClube}>Editar</button> */}
-                            <button style={{ marginRight: '15px' }} onClick={() => handleSelecionarClube(clube)}>Editar</button>
-                            <button onClick={() => excluirClube(clube.id)}>Excluir</button>
+        <div className='home-container'>
+            <div className='quadrado'>
+                <h1>Clubes</h1>
+                <div className='lista-clubes'>
+                    {clubes.map((clube) => (
+                        <div key={clube.id} className="clube-container">
+                            <span>{clube.emoji} {clube.nome}</span>
+                            <div>
+                                <button style={{ marginRight: '15px' }} onClick={() => handleSelecionarClube(clube)}>Editar</button>
+                                <button onClick={() => excluirClube(clube.id)}>Excluir</button>
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
 
-            <div className='botao-canto'>
-                <button onClick={onVoltarClick}>Voltar</button>
-            </div>
-            <div className='botao-cantoR'>
-                <button onClick={onNovoClube}>Novo Clube</button>
+                <div className='botao-canto'>
+                    <button onClick={onVoltarClick}>Voltar</button>
+                </div>
+                <div className='botao-nav'>
+                    <button onClick={onNovoClube}>Novo Clube</button>
+                </div>
             </div>
         </div>
     );

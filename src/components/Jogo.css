@@ -100,7 +100,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh;
   }
   
 .jogo-container pergunta {
@@ -109,6 +108,10 @@
 
 /*Media Query para telas grandes*/
 @media (min-width: 769px) {
+    .jogo-container {
+        height: 50vh;
+    }
+
     .quadrado {
         border-radius: 20px;
         padding: 20px;
@@ -158,6 +161,10 @@
 
 /*Media Query para telas pequenas*/
 @media (max-width: 768px) {
+    .jogo-container {
+        height: 25vh;
+    }
+
     .quadrado {
         border-radius: 20px;
         padding: 10px;

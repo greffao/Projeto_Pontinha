@@ -32,6 +32,7 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
 
     
     return (
+        <div className='home-container'>
         <div className='quadrado'>
             <h1 className="titulo-clubes">Novo Clube</h1>
             <input
@@ -48,9 +49,10 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
             <div className='botao-canto'>
                 <button onClick={onEntrarClick}>Cancelar</button>
             </div>
-            <div className='botao-cantoR'>
+            <div className='botao-nav'>
                 <button onClick={handleCriarClube}>Criar Novo Clube</button>
             </div>
+        </div>
         </div>
     );
 }

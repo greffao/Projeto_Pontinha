@@ -18,9 +18,11 @@
 /*Título*/
 
 body {
-  background-image: url(../src/teste.avif); 
+  background-image: url(../src/plano-de-fundo.webp); 
   background-size: cover;
   background-position: center; 
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .home-container {
@@ -60,7 +62,6 @@ body {
 }
 
 .quadrado h1 {
-  margin-bottom: auto;
   color: black;
   font-weight: bold;
 }
@@ -85,6 +86,10 @@ body {
   background-color: #d6633e;
 }
 
+.quadrado p {
+  text-align: justify;
+}
+
 .botoes-menu {
   display: flex;
   flex-direction: column;
@@ -96,52 +101,17 @@ body {
   margin-right: 20px;
 }
 
-/*Retangulo*/
-
-.retangulo {
-  width: 600px;
-  height: 400px;
-  background-color: #f5f5dc;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px
-}
-
-.retangulo p {
-  margin-bottom: auto; 
-  margin-left: 25px; 
-  margin-right: 25px; 
-  margin-top: 40px; 
-  font-size: 25px;
-}
-
-.retangulo button {
-  padding: 10px 20px;
-  background-color: #ff8c66;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin: 10px 0;
-  font-size: 25px;
-}
-
-.retangulo button:hover {
-  background-color: #d6633e;
+.botao-nav {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding-right: 10px;
 }
 
 .botoes-menuR {
   display: flex;
   flex-direction: column;
   margin-bottom: auto;
-}
-
-.botao-cantoR {
-  align-self: flex-end;
-  margin-right: 20px;
 }
 
 .botao-cantoR button {
@@ -161,14 +131,94 @@ body {
   align-items: center;
 }
 
+.footer p {
+  font-weight: bold;
+}
+
 .icones {
   display: flex;
   flex-direction: row;
 }
 
+/* Area Coordenacao */
+
+.formulario-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.label {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.quadrado, .formulario-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.lista-clubes {
+  width: 100%; 
+  overflow-y: auto;
+  margin-bottom: auto;
+}
+
+.label, .input-field {
+  width: 100%;
+}
+
+.espaco-botao {
+  margin-right: 100px;
+}
+
+.botao-acao {
+  margin-right: 15px;
+}
+
+.clube-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+}
+
+
+/* Novo Clube */
+.titulo-clubes {
+  margin-bottom: 20px;
+}
+
+.input-clube {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.botao-imagem {
+  width: 25%;
+  padding: 10px;
+  margin-bottom: auto !important;
+}
+
 /*Media Query para telas grandes*/
 @media (min-width: 769px) {
-
   .home-container {
     height: 50vh;
   }
@@ -202,6 +252,7 @@ body {
   }
 
   .quadrado h1 {
+    margin-bottom: 20px;
     font-size: 30px;
   }
 
@@ -212,6 +263,11 @@ body {
   .quadrado button {
     padding: 10px 20px;
     margin: 10px 0;
+  }
+
+  .quadrado p {
+    font-size: 20px;
+    text-indent: 30px;
   }
 
   .botoes-menu button {
@@ -231,11 +287,23 @@ body {
     font-size: 30px;
     margin-right: 20px;
   }
+
+  .formulario-login {
+    gap: 10px;
+    margin-top: 20px;
+    font-size: 25px;
+    margin-bottom: 100px;
+  }
+
+  .lista-clubes {
+    width: 100%; 
+    max-height: 80vh;
+    margin: 20px 0;
+  }
 }
 
 /*Media Query para telas pequenas*/
 @media (max-width: 768px) {
-
   .home-container {
     height: 25vh;
   }
@@ -275,7 +343,7 @@ body {
   }
 
   .quadrado h1 {
-    font-size: 25px;
+    font-size: 20px;
   }
 
   .quadrado h3 {
@@ -286,6 +354,11 @@ body {
     padding: 5px 10px;
     margin: 5px 0;
     font-size: 20px;
+  }
+
+  .quadrado p {
+    font-size: 10px;
+    text-indent: 15px;
   }
 
   .botoes-menu button {
@@ -305,6 +378,44 @@ body {
     font-size: 25px;
     margin-right: 10px;
   }
+
+  .formulario-login {
+    gap: 5px;
+    margin-top: 10px;
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+
+  .lista-clubes {
+    width: 100%; 
+    max-height: 40vh;
+    margin: 10px 0;
+    font-size: 10px;
+  }
+
+  .clube-container button {
+    font-size: 10px;
+  }
+
+  .botao-imagem {
+    font-size: 15px !important;
+  }
+
+  .input-clube {
+    width: 50%;
+    height: 1%;
+    padding: 4px;
+    font-size: 12px;
+    margin-bottom: 7px;
+  }
+
+  .dropdown-select {
+    width: 75%;
+    height: 10%;      
+    padding: 5px;    
+    margin-bottom: 0px;
+    font-size: 10px;
+}
 }
 
 /*Título 'Pontinha' colorido*/
@@ -338,87 +449,4 @@ body {
 
 .letra-a {
   color: cyan;
-}
-
-/* Area Coordenacao */
-
-.formulario-login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
-  font-size: 25px;
-  margin-bottom: 100px;
-}
-
-.input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.label {
-  text-align: center;
-  width: 100%;
-  margin-bottom: 5px;
-}
-
-.input-field {
-  width: 100%;  /* Manter a largura */
-  padding: 5px; /* Ajuste de preenchimento para uma altura adequada */
-  box-sizing: border-box; /* Inclui padding no cálculo da largura */
-}
-
-.quadrado, .formulario-login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.lista-clubes {
-  width: 100%; /* ou uma largura específica conforme necessário */
-  max-height: 80vh; /* ajuste conforme necessário baseado no layout da página */
-  overflow-y: auto; /* habilita a scrollbar vertical se o conteúdo exceder o max-height */
-  margin: 20px 0; /* espaço ao redor da lista */
-  margin-bottom: auto;
-}
-
-.label, .input-field {
-  width: 100%; /* Ajuste conforme necessário */
-}
-
-.espaco-botao {
-  margin-right: 100px;
-}
-
-.botao-acao {
-  margin-right: 15px;
-}
-
-.clube-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px;
-}
-
-
-/* Novo Clube */
-.titulo-clubes {
-  margin-bottom: 20px;
-}
-
-.input-clube {
-  width: 80%;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.botao-imagem {
-  width: 25%;
-  padding: 10px;
-  margin-bottom: auto !important;
 }

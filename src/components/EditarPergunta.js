@@ -27,43 +27,45 @@ const EditarPergunta = ({ onVoltarClick, pergunta }) => {
     };
 
     return (
-        <div className='quadrado'>
-            <h1 className="titulo-clubes">Editar Pergunta</h1>
-            <input
-                type="text"
-                value={questao}
-                onChange={handleQuestaoChange}
-                placeholder="Digite a questão"
-                className="input-clube"
-            />
-            {alternativas.map((alt, index) => (
-                <div key={index}>
-                    <input
-                        type="text"
-                        value={alt}
-                        onChange={(e) => handleAlternativaChange(index, e.target.value)}
-                        placeholder={`Alternativa ${index + 1}`}
-                        className="input-clube"
-                    />
-                </div>
-            ))}
-            <select
-                value={respostaCorreta}
-                onChange={(e) => setRespostaCorreta(e.target.value)}
-                className="dropdown-select"
-            >
-                <option value="">Selecione a alternativa correta</option>
-                {alternativas.map((_, index) => (
-                    <option key={index} value={index}>
-                        Alternativa {index + 1}
-                    </option>
+        <div className='home-container'>
+            <div className='quadrado'>
+                <h1>Editar Pergunta</h1>
+                <input
+                    type="text"
+                    value={questao}
+                    onChange={handleQuestaoChange}
+                    placeholder="Digite a questão"
+                    className="input-clube"
+                />
+                {alternativas.map((alt, index) => (
+                    <div key={index}>
+                        <input
+                            type="text"
+                            value={alt}
+                            onChange={(e) => handleAlternativaChange(index, e.target.value)}
+                            placeholder={`Alternativa ${index + 1}`}
+                            className="input-clube"
+                        />
+                    </div>
                 ))}
-            </select>
-            <div className='botao-canto'>
-                <button onClick={onVoltarClick}>Cancelar</button>
-            </div>
-            <div className='botao-cantoR'>
-                <button onClick={onVoltarClick}>Salvar Alterações</button>
+                <select
+                    value={respostaCorreta}
+                    onChange={(e) => setRespostaCorreta(e.target.value)}
+                    className="dropdown-select"
+                >
+                    <option value="">Selecione a alternativa correta</option>
+                    {alternativas.map((_, index) => (
+                        <option key={index} value={index}>
+                            Alternativa {index + 1}
+                        </option>
+                    ))}
+                </select>
+                <div className='botao-canto'>
+                    <button onClick={onVoltarClick}>Cancelar</button>
+                </div>
+                <div className='botao-nav'>
+                    <button onClick={onVoltarClick}>Salvar Alterações</button>
+                </div>
             </div>
         </div>
     );

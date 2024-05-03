@@ -24,17 +24,15 @@ const GerenciamentoPerguntas = ({ temaInicial, voltarAoTema }) => {
     }
 
     return (
+        <div className='home-container'>
         <div className='quadrado'>
-            <h1 className="titulo-clubes">Perguntas do Tema: {temaInicial.nome}</h1>
+            <h1>Perguntas do Tema: {temaInicial.nome}</h1>
             <div className='lista-clubes'>
                 {temaInicial.perguntas.map((pergunta, index) => (
-                    <div key={index} className="clube-container"> {/* Uso do índice como key */}
+                    <div key={index} className="clube-container">
                         <span>Pergunta: {pergunta.questao}</span>
-                        <div>
-                            {/* Passando o índice para funções de editar e excluir */}
-                            <button style={{ marginRight: '15px' }} onClick={() => handleEditarPergunta(pergunta)}>Editar</button>
-                            <button onClick={() => console.log("Excluir pergunta")}>Excluir Pergunta</button>
-                        </div>
+                        <button style={{ marginRight: '15px' }} onClick={() => handleEditarPergunta(pergunta)}>Editar</button>
+                        <button onClick={() => console.log("Excluir pergunta")}>Excluir Pergunta</button>
                     </div>
                 ))}
             </div>
@@ -42,9 +40,10 @@ const GerenciamentoPerguntas = ({ temaInicial, voltarAoTema }) => {
             <div className='botao-canto'>
                 <button onClick={voltarAoTema}>Voltar aos Temas</button>
             </div>
-            <div className='botao-cantoR'>
+            <div className='botao-nav'>
                 <button onClick={() => handleNovaPergunta(temaInicial)}>Nova Pergunta</button>
             </div>
+        </div>
         </div>
     );
 };

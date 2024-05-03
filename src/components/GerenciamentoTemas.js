@@ -39,6 +39,7 @@ const GerenciamentoTemas = ({ clubeInicial, clubes, setClubes, voltarAoClube, on
     }
 
     return (
+        <div className='home-container'>
         <div className='quadrado'>
             <h1 className="titulo-clubes">Temas do Clube: {clube.nome}</h1>
             <div className='lista-clubes'>
@@ -56,9 +57,10 @@ const GerenciamentoTemas = ({ clubeInicial, clubes, setClubes, voltarAoClube, on
             <div className='botao-canto'>
                 <button onClick={voltarAoClube}>Voltar aos Clubes</button>
             </div>
-            <div className='botao-cantoR'>
+            <div className='botao-nav'>
                 <button onClick={onNovoTema}>Novo Tema</button>
             </div>
+        </div>
         </div>
     );
 };

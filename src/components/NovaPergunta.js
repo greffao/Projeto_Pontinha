@@ -35,8 +35,9 @@ const NovaPergunta = ({ onVoltarClick, tema }) => {
     };
 
     return (
+        <div className='home-container'>
         <div className='quadrado'>
-            <h1 className="titulo-clubes">Nova Pergunta</h1>
+            <h1>Nova Pergunta</h1>
             <input
                 type="text"
                 value={questao}
@@ -69,9 +70,10 @@ const NovaPergunta = ({ onVoltarClick, tema }) => {
             <div className='botao-canto'>
                 <button onClick={onVoltarClick}>Cancelar</button>
             </div>
-            <div className='botao-cantoR'>
+            <div className='botao-nav'>
                 <button onClick={handleCriarPergunta}>Criar Nova Pergunta</button>
             </div>
+        </div>
         </div>
     );
 }
