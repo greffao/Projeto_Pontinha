@@ -1,6 +1,4 @@
 import { useState } from 'react'
-// import imgQmSomos from "./src/images/fotoQuemSomos.jpg"
-var imgQmSomos = require("../../src/images/fotoQuemSomos.jpg");
 
 const QuemSomos = ({ onVoltarClick }) => {
     return (
