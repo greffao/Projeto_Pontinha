@@ -1,6 +1,7 @@
 # Projeto Pontinha
 
 *Lucas Greff Meneses - 13671615*
+*Yuri Fernandes Pereira - 13730127*
 
 <br>
 
