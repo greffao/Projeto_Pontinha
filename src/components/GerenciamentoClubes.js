@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import GerenciamentoTemas from './GerenciamentoTemas';
+import { Link } from 'react-router-dom/dist';
 
-const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, onEditarClube, clubes }) => {
+const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes }) => {
     const [clubesLocais, setClubesLocais] = useState([]);
     const [clubeSelecionado, setClubeSelecionado] = useState(null);
 
@@ -24,7 +25,7 @@ const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, onEditarClube, clubes
         setClubesLocais([...clubes]);
     };
 
-    if(clubeSelecionado) {
+    if (clubeSelecionado) {
         console.log(clubeSelecionado);
         return <GerenciamentoTemas clubeInicial={clubeSelecionado} clubes={clubes} setClubes={setClubesLocais} voltarAoClube={() => setClubeSelecionado(null)} />;
     }
@@ -44,13 +45,16 @@ const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, onEditarClube, clubes
                         </div>
                     ))}
                 </div>
-
-                <div className='botao-canto'>
-                    <button onClick={onVoltarClick}>Voltar</button>
-                </div>
-                <div className='botao-nav'>
-                    <button onClick={onNovoClube}>Novo Clube</button>
-                </div>
+                <Link to='/area-coordenacao'>
+                    <div className='botao-canto'>
+                        <button onClick={onVoltarClick}>Voltar</button>
+                    </div>
+                </Link>
+                <Link to='/novo-clube'>
+                    <div className='botao-nav'>
+                        <button onClick={onNovoClube}>Novo Clube</button>
+                    </div>
+                </Link>
             </div>
         </div>
     );

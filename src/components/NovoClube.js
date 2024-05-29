@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom/dist';
 
 const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
     const [nomeClube, setNomeClube] = useState('');
@@ -45,10 +46,11 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
             <button onClick={handleAlterarImagem} className="botao-imagem">
                 Alterar Imagem
             </button>
-
-            <div className='botao-canto'>
-                <button onClick={onEntrarClick}>Cancelar</button>
-            </div>
+            <Link to='/gerenciamento'>
+                <div className='botao-canto'>
+                    <button onClick={onEntrarClick}>Cancelar</button>
+                </div>
+            </Link>
             <div className='botao-nav'>
                 <button onClick={handleCriarClube}>Criar Novo Clube</button>
             </div>

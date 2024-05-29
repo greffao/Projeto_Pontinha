@@ -36,44 +36,34 @@ const NovaPergunta = ({ onVoltarClick, tema }) => {
 
     return (
         <div className='home-container'>
-        <div className='quadrado'>
-            <h1>Nova Pergunta</h1>
-            <input
-                type="text"
-                value={questao}
-                onChange={handleQuestaoChange}
-                placeholder="Digite a questão"
-                className="input-clube"
-            />
-            {alternativas.map((alt, index) => (
+            <div className='quadrado'>
+                <h1>Nova Pergunta</h1>
+                <figure>Coloque a resposta correta na alternativa 1</figure>
                 <input
-                    key={index}
                     type="text"
-                    value={alt}
-                    onChange={(e) => handleAlternativaChange(index, e.target.value)}
-                    placeholder={`Alternativa ${index + 1}`}
+                    value={questao}
+                    onChange={handleQuestaoChange}
+                    placeholder="Digite a questão"
                     className="input-clube"
                 />
-            ))}
-            <select
-                value={respostaCorreta}
-                onChange={(e) => setRespostaCorreta(e.target.value)}
-                className="dropdown-select"
-            >
-                <option value="">Selecione a alternativa correta</option>
                 {alternativas.map((alt, index) => (
-                    <option key={index} value={`Alternativa ${index + 1}`}>
-                        Alternativa {index + 1}
-                    </option>
+                    <input
+                        key={index}
+                        type="text"
+                        value={alt}
+                        onChange={(e) => handleAlternativaChange(index, e.target.value)}
+                        placeholder={`Alternativa ${index + 1}`}
+                        className="input-clube"
+                    />
                 ))}
-            </select>
-            <div className='botao-canto'>
-                <button onClick={onVoltarClick}>Cancelar</button>
+                
+                <div className='botao-canto'>
+                    <button onClick={onVoltarClick}>Cancelar</button>
+                </div>
+                <div className='botao-nav'>
+                    <button onClick={handleCriarPergunta}>Criar Nova Pergunta</button>
+                </div>
             </div>
-            <div className='botao-nav'>
-                <button onClick={handleCriarPergunta}>Criar Nova Pergunta</button>
-            </div>
-        </div>
         </div>
     );
 }

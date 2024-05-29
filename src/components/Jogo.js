@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import './Jogo.css'
 
 const Jogo = ({ onVoltarClick, clubes }) => {
@@ -99,9 +100,11 @@ const Jogo = ({ onVoltarClick, clubes }) => {
                             ))}
                         </div>
                     </div>
-                    <div className='botao-canto'>
-                        <button onClick={onVoltarClick}>Voltar</button>
-                    </div>
+                    <Link to='/'>
+                        <div className='botao-canto'>
+                            <button>Voltar</button>
+                        </div>
+                    </Link>
                     </>
                 ) : !temaSelecionado ? (
                     <> {/**

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import GerenciamentoPerguntas from './GerenciamentoPerguntas';
+import { Link } from 'react-router-dom/dist';
 
 const GerenciamentoTemas = ({ clubeInicial, clubes, setClubes, voltarAoClube, onNovoTema }) => {
     const [clube, setClube] = useState(clubeInicial);
@@ -40,27 +41,32 @@ const GerenciamentoTemas = ({ clubeInicial, clubes, setClubes, voltarAoClube, on
 
     return (
         <div className='home-container'>
-        <div className='quadrado'>
-            <h1 className="titulo-clubes">Temas do Clube: {clube.nome}</h1>
-            <div className='lista-clubes'>
-                {clube.temas.map(tema => (
-                    <div key={tema.id} className="clube-container">
-                        <span>{tema.nome}</span>
-                        <div>
-                            <button style={{ marginRight: '15px' }} onClick={() => handleSelecionarTema(tema)}>Editar</button>
-                            <button onClick={() => excluirTema(tema.id)}>Excluir Tema</button>
+            <div className='quadrado'>
+                <h1 className="titulo-clubes">Temas do Clube: {clube.nome}</h1>
+                <div className='lista-clubes'>
+                    {clube.temas.map(tema => (
+                        <div key={tema.id} className="clube-container">
+                            <span>{tema.nome}</span>
+                            <div>
+                                <button style={{ marginRight: '15px' }} onClick={() => handleSelecionarTema(tema)}>Editar</button>
+                                <button onClick={() => excluirTema(tema.id)}>Excluir Tema</button>
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
 
-            <div className='botao-canto'>
-                <button onClick={voltarAoClube}>Voltar aos Clubes</button>
+                <div className='botao-canto'>
+                    <button onClick={voltarAoClube}>Voltar aos Clubes</button>
+                </div>
+                {/**TO-DO: Ainda não temos o componente de NovoTema então vou colocar o NovoClube no lugar.
+                 * Acho que seria um solução elegante reutilizar o componente.
+                 */}
+                <Link to='/novo-clube'>
+                    <div className='botao-nav'>
+                        <button onClick={onNovoTema}>Novo Tema</button>
+                    </div>
+                </Link>
             </div>
-            <div className='botao-nav'>
-                <button onClick={onNovoTema}>Novo Tema</button>
-            </div>
-        </div>
         </div>
     );
 };

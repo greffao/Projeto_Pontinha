@@ -1,21 +1,22 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom/dist';
 
-const AreaCoordenacao = ({ onVoltarClick, onEntrarClick}) => {
+const AreaCoordenacao = () => {
     const [login, setLogin] = useState('');
     const [senha, setSenha] = useState('');
-
-    // const handleEntrarClick = () => {
-    //     console.log("Login:", login, "Senha:", senha);
-    //     // Adicione aqui a lógica de autenticação e redirecionamento
-    // };
 
     return (
         <div className='home-container'>
             <div className='quadrado'>
                 <h1>Área de Coordenação</h1>
-                <div className='botao-canto'>
-                    <button onClick={onVoltarClick}>Voltar</button>
-                </div>
+                <Link to='/'>
+                    <div className='botao-canto'>
+                        <button>Voltar</button>
+                    </div>
+                </Link>
+                {/**
+                 * TO-DO: Fazer a autenticação
+                 */}
                 <div className='formulario-login'>
                     <div className="input-container">
                         <label className="label">
@@ -39,7 +40,9 @@ const AreaCoordenacao = ({ onVoltarClick, onEntrarClick}) => {
                             className='input-field'
                         />
                     </div>
-                    <button onClick={onEntrarClick}>Entrar</button>
+                    <Link to='/gerenciamento'>
+                        <button>Entrar</button>
+                    </Link>
                 </div>
             </div>
         </div>

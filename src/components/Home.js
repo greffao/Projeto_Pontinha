@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { Link } from 'react-router-dom';
 
-const Home = ({ onJogarClick, onQuemSomosClick, onAreaCoordenacaoClick }) => {
+const Home = () => {
     return (
         <div className='home-container'>
             <div className='quadrado'>
@@ -10,15 +10,21 @@ const Home = ({ onJogarClick, onQuemSomosClick, onAreaCoordenacaoClick }) => {
                 </div>
 
                 <div className='botoes-menu'>
-                    <button onClick={onJogarClick}>Jogar</button>
-                    <button onClick={onQuemSomosClick}>Quem somos</button>
+                    <Link to="/jogo">
+                        <button>Jogar</button>
+                    </Link>
+                    <Link to="/quem-somos">
+                        <button>Quem somos</button>
+                    </Link>
                 </div>
                 <div className='botao-canto'>
-                    <button onClick={onAreaCoordenacaoClick}>Área da coordenação</button>
+                    <Link to="/area-coordenacao">
+                        <button>Área da coordenação</button>
+                    </Link>
                 </div>
             </div>
         </div>
     );
 }
- 
+
 export default Home;

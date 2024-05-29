@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 const EditarPergunta = ({ onVoltarClick, pergunta }) => {
     const [questao, setQuestao] = useState('');
     const [alternativas, setAlternativas] = useState([]);
-    const [respostaCorreta, setRespostaCorreta] = useState('');
 
     console.log(pergunta);
 
@@ -12,7 +11,6 @@ const EditarPergunta = ({ onVoltarClick, pergunta }) => {
         if (pergunta) {
             setQuestao(pergunta.questao);
             setAlternativas(pergunta.alternativas || []);
-            setRespostaCorreta(pergunta.respostaCorreta);
         }
     }, [pergunta]);
 
@@ -30,6 +28,7 @@ const EditarPergunta = ({ onVoltarClick, pergunta }) => {
         <div className='home-container'>
             <div className='quadrado'>
                 <h1>Editar Pergunta</h1>
+                <figure>Deixe a resposta correta na alternativa 1</figure>
                 <input
                     type="text"
                     value={questao}
@@ -48,18 +47,6 @@ const EditarPergunta = ({ onVoltarClick, pergunta }) => {
                         />
                     </div>
                 ))}
-                <select
-                    value={respostaCorreta}
-                    onChange={(e) => setRespostaCorreta(e.target.value)}
-                    className="dropdown-select"
-                >
-                    <option value="">Selecione a alternativa correta</option>
-                    {alternativas.map((_, index) => (
-                        <option key={index} value={index}>
-                            Alternativa {index + 1}
-                        </option>
-                    ))}
-                </select>
                 <div className='botao-canto'>
                     <button onClick={onVoltarClick}>Cancelar</button>
                 </div>

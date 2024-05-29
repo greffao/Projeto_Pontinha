@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { Link } from 'react-router-dom';
 
-const QuemSomos = ({ onVoltarClick }) => {
+const QuemSomos = () => {
     return (
         <div className='home-container'>
             <div className='quadrado'>
@@ -12,9 +12,11 @@ const QuemSomos = ({ onVoltarClick }) => {
                     voluntário, às crianças carentes, e mais que isso, ao participarem do projeto, 
                     os universitários criam competências como autoconfiança, empatia, liderança, 
                     entre muitos outros benefícios, sendo um sistema que favorece a todos. </p>
-                <div className='botao-canto'>
-                    <button onClick={onVoltarClick}>Voltar</button>
-                </div>
+                <Link to="/">
+                    <div className='botao-canto'>
+                        <button>Voltar</button>
+                    </div>
+                </Link>
             </div>
         </div>
     );

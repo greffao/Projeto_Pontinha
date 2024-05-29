@@ -94,6 +94,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-bottom: auto;
+  align-items: center;
 }
 
 .botao-canto {

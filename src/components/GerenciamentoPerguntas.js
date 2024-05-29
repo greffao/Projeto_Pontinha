@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import NovaPergunta from './NovaPergunta';
 import EditarPergunta from './EditarPergunta';
 
@@ -25,25 +25,25 @@ const GerenciamentoPerguntas = ({ temaInicial, voltarAoTema }) => {
 
     return (
         <div className='home-container'>
-        <div className='quadrado'>
-            <h1>Perguntas do Tema: {temaInicial.nome}</h1>
-            <div className='lista-clubes'>
-                {temaInicial.perguntas.map((pergunta, index) => (
-                    <div key={index} className="clube-container">
-                        <span>Pergunta: {pergunta.questao}</span>
-                        <button style={{ marginRight: '15px' }} onClick={() => handleEditarPergunta(pergunta)}>Editar</button>
-                        <button onClick={() => console.log("Excluir pergunta")}>Excluir Pergunta</button>
-                    </div>
-                ))}
-            </div>
+            <div className='quadrado'>
+                <h1>Perguntas do Tema: {temaInicial.nome}</h1>
+                <div className='lista-clubes'>
+                    {temaInicial.perguntas.map((pergunta, index) => (
+                        <div key={index} className="clube-container">
+                            <span>Pergunta: {pergunta.questao}</span>
+                            <button style={{ marginRight: '15px' }} onClick={() => handleEditarPergunta(pergunta)}>Editar</button>
+                            <button onClick={() => console.log("Excluir pergunta")}>Excluir Pergunta</button>
+                        </div>
+                    ))}
+                </div>
 
-            <div className='botao-canto'>
-                <button onClick={voltarAoTema}>Voltar aos Temas</button>
+                <div className='botao-canto'>
+                    <button onClick={voltarAoTema}>Voltar aos Temas</button>
+                </div>
+                <div className='botao-nav'>
+                    <button onClick={() => handleNovaPergunta(temaInicial)}>Nova Pergunta</button>
+                </div>
             </div>
-            <div className='botao-nav'>
-                <button onClick={() => handleNovaPergunta(temaInicial)}>Nova Pergunta</button>
-            </div>
-        </div>
         </div>
     );
 };
