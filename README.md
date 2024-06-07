@@ -47,7 +47,6 @@ npm install nodemon --save-dev
 Para rodar a API para desenvolvimento, existe o comando dev em Scripts em package.JSON, então utilize:
 
 ```bash
-cd backend/src
 npm run dev
 ```
 
