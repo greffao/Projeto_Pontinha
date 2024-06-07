@@ -1,0 +1,122 @@
+POST http://localhost:4242/api/pergunta
+Content-Type: application/json
+
+{
+    "cod": 1,
+    "alternativa_a": "A velocidade da luz nesse meio é 1,2 vezes mais lenta do que no vácuo.",
+    "alternativa_b": "A velocidade da luz nesse meio é 1,2 vezes mais rápida do que no vácuo.",
+    "alternativa_c": "A velocidade da luz nesse meio é igual à velocidade da luz no vácuo.",
+    "alternativa_d": "A velocidade da luz nesse meio depende da velocidade de seu observador",
+    "questao": "A luz branca incide sobre um meio transparente cujo índice de refração é igual a 1,2. Assinale a alternativa correta em relação à velocidade da luz nesse meio:",
+    "imagem": "https://static.sciencelearn.org.nz/images/images/000/000/049/embed/Refraction-of-light-in-water20150805-30610-expmepedited.png?1674163623"
+
+}
+
+###
+GET http://localhost:4242/api/pergunta
+
+###
+GET http://localhost:4242/api/pergunta/1
+
+###
+DELETE http://localhost:4242/api/pergunta/1
+
+###
+PUT http://localhost:4242/api/pergunta/1
+Content-Type: application/json
+
+{
+    "cod": 2,
+    "alternativa_a": "A velocidade da luz nesse meio é 1,2 vezes mais lenta do que no vácuo.",
+    "alternativa_b": "A velocidade da luz nesse meio é 1,2 vezes mais rápida do que no vácuo.",
+    "alternativa_c": "A velocidade da luz nesse meio é igual à velocidade da luz no vácuo.",
+    "alternativa_d": "A velocidade da luz nesse meio depende da velocidade de seu observador",
+    "questao": "A luz branca incide sobre um meio transparente cujo índice de refração é igual a 1,2. Assinale a alternativa correta em relação à velocidade da luz nesse meio:",
+    "imagem": "https://static.sciencelearn.org.nz/images/images/000/000/049/embed/Refraction-of-light-in-water20150805-30610-expmepedited.png?1674163623"
+
+}
+
+###
+POST http://localhost:4242/api/coordenador
+Content-Type: application/json
+
+{
+    "login": "LuizRicardo",
+    "senha": "sqlmaster123"
+}
+
+###
+GET http://localhost:4242/api/coordenador
+
+###
+GET http://localhost:4242/api/coordenador/LuizRicardo
+
+###
+DELETE http://localhost:4242/api/coordenador/LuizRicardo
+
+###
+PUT http://localhost:4242/api/coordenador/LuizRicardo
+Content-Type: application/json
+
+{
+    "login": "LuizRicardo",
+    "senha": "sqlmaster3224"
+}
+
+###
+POST http://localhost:4242/api/tema
+Content-Type: application/json
+
+{
+    "cod": "1",
+    "nome": "Partículas e Ondas",
+    "imagem": "https://s1.static.brasilescola.uol.com.br/be/2020/12/dualidade-onda-particula.jpg"
+}
+
+###
+GET http://localhost:4242/api/tema
+
+###
+GET http://localhost:4242/api/tema/1
+
+###
+DELETE http://localhost:4242/api/tema/1
+
+###
+PUT http://localhost:4242/api/tema/1
+Content-Type: application/json
+
+{
+    "cod": "2",
+    "nome": "Partículas e Ondas",
+    "imagem": "https://s1.static.brasilescola.uol.com.br/be/2020/12/dualidade-onda-particula.jpg"
+}
+
+###
+POST http://localhost:4242/api/clube
+Content-Type: application/json
+
+{
+    "cod": "1",
+    "nome": "Clube Ciências Exatas",
+    "imagem": "https://static.studyusa.com/course-category/stem_md_1x.webp"
+}
+
+###
+GET http://localhost:4242/api/clube
+
+###
+GET http://localhost:4242/api/clube/1
+
+###
+DELETE http://localhost:4242/api/clube/1
+
+###
+PUT http://localhost:4242/api/clube/1
+Content-Type: application/json
+
+{   
+    "cod": "2",
+    "nome": "Clube Ciências Exatas",
+    "imagem": "https://static.studyusa.com/course-category/stem_md_1x.webp"
+}

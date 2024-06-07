@@ -1,0 +1,23 @@
+{
+  "name": "projeto-pontinha-backend",
+  "version": "1.0.0",
+  "description": "API para Banco de Dados desenvolvido para o jogo educativo do Projeto Pontinha desenvolvido pela equipe 2A em conjunto com as professoras Rosana e Simone para a disciplina de Engenharia de Software (01/2024)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "./node_modules/.bin/nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}
