@@ -1,13 +1,16 @@
-// Esse .js do router adiciona as rotas das tabelas ao router que será usado pelo server.js
+const express = require('express');
+const router = express.Router();
 
-const router = require('express').Router();
+// Importar middleware de autenticação
+const authController = require('../controllers/auth');
 
 // Clube router
 const clubeRouter = require('./clube');
 router.use('/', clubeRouter);
 
-// Coordenador router
+// Coordenador router (protegido)
 const coordenadorRouter = require('./coordenador');
+// router.use('/', authController.validate, coordenadorRouter);
 router.use('/', coordenadorRouter);
 
 // Pergunta router
@@ -19,4 +22,3 @@ const temaRouter = require('./tema');
 router.use('/', temaRouter);
 
 module.exports = router;
-
