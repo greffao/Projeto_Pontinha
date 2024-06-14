@@ -50,6 +50,11 @@ const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes }) => {
                         <button onClick={onVoltarClick}>Voltar</button>
                     </div>
                 </Link>
+                <Link to='/gerenciamento-coordenadores'>
+                    <div>
+                        <button>Alterar Coordenadores</button>
+                    </div>
+                </Link>
                 <Link to='/novo-clube'>
                     <div className='botao-nav'>
                         <button onClick={onNovoClube}>Novo Clube</button>
