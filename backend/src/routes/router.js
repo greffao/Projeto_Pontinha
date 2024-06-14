@@ -10,8 +10,8 @@ router.use('/', clubeRouter);
 
 // Coordenador router (protegido)
 const coordenadorRouter = require('./coordenador');
-// router.use('/', authController.validate, coordenadorRouter);
-router.use('/', coordenadorRouter);
+router.use('/coordenador', authController.validate, coordenadorRouter);
+// router.use('/', coordenadorRouter);
 
 // Pergunta router
 const perguntaRouter = require('./pergunta');

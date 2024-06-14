@@ -1,10 +1,16 @@
 const router = require('express').Router();
 
 const temaController = require('../controllers/temaController');
+const authController = require('../controllers/auth');
+
+// Middleware que valida as operações
+const validateAuth = (req, res, next) => {
+    return authController.validate(req, res, next);
+};
 
 router
     .route('/tema')
-    .post((req, res) => temaController.create(req, res));
+    .post(validateAuth, (req, res) => temaController.create(req, res));
 
 router
     .route('/tema')
@@ -16,11 +22,11 @@ router
 
 router
     .route('/tema/:cod')
-    .delete((req, res) => temaController.delete(req, res));
+    .delete(validateAuth, (req, res) => temaController.delete(req, res));
 
 router
     .route('/tema/:cod')
-    .put((req, res) => temaController.update(req, res));
+    .put(validateAuth, (req, res) => temaController.update(req, res));
 
 
 module.exports = router;

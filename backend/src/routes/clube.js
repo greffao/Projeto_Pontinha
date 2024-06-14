@@ -1,10 +1,16 @@
 const router = require('express').Router();
 
 const clubeController = require('../controllers/clubeController');
+const authController = require('../controllers/auth');
+
+// Middleware que valida as operações
+const validateAuth = (req, res, next) => {
+    return authController.validate(req, res, next);
+};
 
 router
     .route('/clube')
-    .post((req, res) => clubeController.create(req, res));
+    .post(validateAuth, (req, res) => clubeController.create(req, res));
 
 router
     .route('/clube')
@@ -16,11 +22,11 @@ router
 
 router
     .route('/clube/:cod')
-    .delete((req, res) => clubeController.delete(req, res));
+    .delete(validateAuth, (req, res) => clubeController.delete(req, res));
 
 router
     .route('/clube/:cod')
-    .put((req, res) => clubeController.update(req, res));
+    .put(validateAuth, (req, res) => clubeController.update(req, res));
 
 
 module.exports = router;
