@@ -1,15 +1,13 @@
-import { createContext, useEffect, useState } from "react";
-import axios, { isCancel, AxiosError } from "axios";
+import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
-
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    const userToken = localStorage.getItem("user");
     const isLogged = localStorage.getItem("loggedIn");
-
     if (userToken) {
       const username = JSON.parse(user).login;
       const token = JSON.parse(user).token;
@@ -29,6 +27,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => res.data);
 
+    let token = response[0].token;
     localStorage.setItem("user", JSON.stringify({ username, token }));
     setUser({ username, token });
     return;
