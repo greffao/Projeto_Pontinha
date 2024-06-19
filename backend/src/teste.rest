@@ -1,0 +1,209 @@
+### Criar um novo clube com tema e perguntas
+
+POST http://localhost:4242/api/clube
+Content-Type: application/json
+
+{
+    "cod": 1,
+    "nome": "Clube dos Animais",
+    "imagem": "clube_animais.png",
+    "temas": [
+        {
+            "cod": 1,
+            "nome": "Animais",
+            "imagem": "tema_animais.png",
+            "perguntas": [
+                {
+                    "cod": 1,
+                    "alternativa_a": "Cat",
+                    "alternativa_b": "Dog",
+                    "alternativa_c": "Horse",
+                    "alternativa_d": "Lion",
+                    "questao": "Que animal é este?",
+                    "imagem": "animal.png"
+                },
+                {
+                    "cod": 2,
+                    "alternativa_a": "Frog",
+                    "alternativa_b": "Dog",
+                    "alternativa_c": "Butterfly",
+                    "alternativa_d": "Elephant",
+                    "questao": "Qual animal é conhecido como melhor amigo do homem?",
+                    "imagem": ""
+                },
+                {
+                    "cod": 3,
+                    "alternativa_a": "Rabbit",
+                    "alternativa_b": "Fish",
+                    "alternativa_c": "Bird",
+                    "alternativa_d": "Turtle",
+                    "questao": "Tem olhos vermelhos, o pelo branquinho e ama cenoura...",
+                    "imagem": ""
+                },
+                {
+                    "cod": 4,
+                    "alternativa_a": "Snake",
+                    "alternativa_b": "Tiger",
+                    "alternativa_c": "Butterfly",
+                    "alternativa_d": "Lion",
+                    "questao": "Qual animal é conhecido como o rei da selva?",
+                    "imagem": ""
+                }
+            ]
+        }
+    ]
+}
+
+### Criar um novo clube de História com tema e perguntas
+
+POST http://localhost:4242/api/clube
+Content-Type: application/json
+
+{
+    "cod": 2,
+    "nome": "História",
+    "imagem": "historia.png",
+    "temas": [
+        {
+            "cod": 1,
+            "nome": "Civilizações Antigas",
+            "imagem": "civilizacoes_antigas.png",
+            "perguntas": [
+                {
+                    "cod": 1,
+                    "alternativa_a": "Egípcios",
+                    "alternativa_b": "Maias",
+                    "alternativa_c": "Incas",
+                    "alternativa_d": "Aztecas",
+                    "questao": "Qual civilização construiu as pirâmides?",
+                    "imagem": "piramides-egito.webp"
+                },
+                {
+                    "cod": 2,
+                    "alternativa_a": "Europa",
+                    "alternativa_b": "Ásia",
+                    "alternativa_c": "África",
+                    "alternativa_d": "América",
+                    "questao": "Em que continente estava localizada a Grécia Antiga?",
+                    "imagem": "grecia-antiga.webp"
+                }
+            ]
+        }
+    ]
+}
+
+### Criar um novo clube de Ciências com tema e perguntas
+
+POST http://localhost:4242/api/clube
+Content-Type: application/json
+
+{
+    "cod": 3,
+    "nome": "Ciências",
+    "imagem": "ciencias.png",
+    "temas": [
+        {
+            "cod": 1,
+            "nome": "Corpo Humano",
+            "imagem": "corpo_humano.png",
+            "perguntas": [
+                {
+                    "cod": 1,
+                    "alternativa_a": "Coração",
+                    "alternativa_b": "Pulmão",
+                    "alternativa_c": "Rim",
+                    "alternativa_d": "Fígado",
+                    "questao": "Qual órgão é responsável pela respiração?",
+                    "imagem": "orgaos.webp"
+                },
+                {
+                    "cod": 2,
+                    "alternativa_a": "Cabeça",
+                    "alternativa_b": "Braço",
+                    "alternativa_c": "Perna",
+                    "alternativa_d": "Tronco",
+                    "questao": "Qual é a maior parte do corpo humano?",
+                    "imagem": "corpo-humano.wepb"
+                }
+            ]
+        }
+    ]
+}
+
+### Atualizar o nome de um clube
+
+PUT http://localhost:4242/api/clube/1
+Content-Type: application/json
+
+{
+    "cod": 1,
+    "nome": "Clube dos Animais Atualizado",
+    "imagem": "clube_animais.png",
+    "temas": [
+        {
+            "cod": 1,
+            "nome": "Animais",
+            "imagem": "tema_animais.png",
+            "perguntas": [
+                {
+                    "cod": 1,
+                    "alternativa_a": "Cat",
+                    "alternativa_b": "Dog",
+                    "alternativa_c": "Horse",
+                    "alternativa_d": "Lion",
+                    "questao": "Que animal é este?",
+                    "imagem": "animal.png"
+                }
+            ]
+        }
+    ]
+}
+
+### Deletar um clube
+
+DELETE http://localhost:4242/api/clube/1
+
+### Atualizar uma pergunta em um tema
+
+PUT http://localhost:4242/api/tema/1/pergunta/1
+Content-Type: application/json
+
+{
+    "cod": 1,
+    "alternativa_a": "Cat",
+    "alternativa_b": "Dog",
+    "alternativa_c": "Horse",
+    "alternativa_d": "Lion",
+    "questao": "Que animal é este? (Atualizado)",
+    "imagem": "animal.png"
+}
+
+### Deletar uma pergunta de um tema
+
+DELETE http://localhost:4242/api/tema/1/pergunta/1
+
+### Atualizar um tema
+
+PUT http://localhost:4242/api/tema/1
+Content-Type: application/json
+
+{
+    "cod": 1,
+    "nome": "Animais Atualizado",
+    "imagem": "tema_animais.png",
+    "perguntas": [
+        {
+            "cod": 1,
+            "alternativa_a": "Cat",
+            "alternativa_b": "Dog",
+            "alternativa_c": "Horse",
+            "alternativa_d": "Lion",
+            "questao": "Que animal é este?",
+            "imagem": "animal.png"
+        }
+    ]
+}
+
+### Deletar um tema
+
+DELETE http://localhost:4242/api/tema/1

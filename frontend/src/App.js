@@ -16,6 +16,8 @@ import {
 } from "react-router-dom";
 import GerenciamentoClubes from "./components/GerenciamentoClubes";
 import NovoClube from "./components/NovoClube";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 /*Variável global temporária enquanto a gente
 não tem o BD*/
@@ -101,6 +103,40 @@ const coordenadores = [
 
 function App() {
   const { user } = useAuth();
+
+  const [clubes, setClubes] = useState([]);
+  const [coordenadores, setCoordenadores] = useState([]);
+
+  // Sempre que o app for inicializado os clubes serão solicitados ao backend e serão passados aos componentes
+  useEffect(() => {
+    axios
+      .get("http://localhost:4242/api/clubes", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => res.json())
+      .then((res) => {
+        setClubes(res);
+      })
+      .catch((error) => console.error(error));
+  });
+
+  // Sempre que o app for inicializado os coordenadores serão solicitados ao backend e serão passados aos componentes
+  useEffect(() => {
+    axios
+      .get("http://localhost:4242/api/coordenadores", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => res.json())
+      .then((res) => {
+        setCoordenadores(res);
+      })
+      .catch((error) => console.error(error));
+  });
+
   //todas as rotas dentro do ProtectedRoute precisam que o usuário esteja logado para serem acessadas
   const ProtectedRoute = ({ isAllowed, redirectPath = "/", children }) => {
     if (!isAllowed) {
@@ -109,6 +145,7 @@ function App() {
 
     return children ? children : <Outlet />;
   };
+
   return (
     <Router>
       <div className="App">
