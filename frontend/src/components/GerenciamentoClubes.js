@@ -1,68 +1,71 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import GerenciamentoTemas from "./GerenciamentoTemas";
 import { Link } from "react-router-dom/dist";
+import { AuthContext } from "../context/auth";
 import axios from "axios";
 
-const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes }) => {
+const GerenciamentoClubes = ({ onVoltarClick, onNovoClube }) => {
   const [clubesLocais, setClubesLocais] = useState([]);
   const [clubeSelecionado, setClubeSelecionado] = useState(null);
+  const { user } = useContext(AuthContext); // pegar usuário atual
 
   const handleSelecionarClube = (clube) => {
     setClubeSelecionado(clube);
   };
 
   useEffect(() => {
-      // essa lógica está acontecendo no main de forma duplicada, decidir como fazer isso direito
-      axios
-      .get("http://localhost:4242/api/clube", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => res.json())
-      .then((res) => {
-        setClubesLocais(res);
-      })
-      .catch((error) => console.error(error));
-
-    setClubesLocais([...clubes]); // Sincroniza o estado local com a variável global na montagem
+    debugger;
+    // essa lógica está acontecendo no main de forma duplicada, decidir como fazer isso direito
+    axios
+    .get("http://localhost:4242/api/clube", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      console.log(res.data);
+      setClubesLocais(res.data);
+    })
+    .catch((error) => console.error(error));
   }, []);
 
   const excluirClube = (clubeId) => {
-    // TODO: acho interessante adicionar um alerta antes de excluir e um depois da exclusão
-    axios
-      .delete(`http://localhost:4242/api/clube/${clubeId}`)
-      .then((res) => console.log(res));
+    // Recuperar token do localStorage
+    const token = user?.token || localStorage.getItem("user")?.token;
 
-    // atualiza os clubes
-    axios
-      .get("http://localhost:4242/api/clubes", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => res.json())
-      .then((res) => {
-        setClubesLocais(res);
-      })
-      .catch((error) => console.error(error));
-
-    // Remove o clube da lista global
-    const index = clubesLocais.findIndex((clube) => clube.id === clubeId);
-    if (index > -1) {
-      clubesLocais.splice(index, 1);
+    // Verificar se token está disponível
+    if(!token) {
+      alert("Usuário não autenticado.");
+      return;
     }
 
-    // Atualiza o estado local para forçar a re-renderização
-    setClubesLocais([...clubesLocais]);
+    // Mostrar pop-up de confirmação
+    const confirmacao = window.confirm("Tem certeza que deseja excluir este clube?");
+
+    if (!confirmacao) {
+      return; // Se o usuário clicar em "Cancelar", interrompe a execução
+    }
+
+    axios
+      .delete(`http://localhost:4242/api/clube/${clubeId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((res) => {
+        console.log("Clube excluído com sucesso:", res.data);
+        setClubesLocais(clubesLocais.filter((clube) => clube.cod !== clubeId));
+      })
+      .catch((error) => console.error(error));
   };
 
+  // essa é uma boa parte para refatorar com routers talvez
   if (clubeSelecionado) {
     console.log(clubeSelecionado);
     return (
       <GerenciamentoTemas
         clubeInicial={clubeSelecionado}
-        clubes={clubes}
+        clubes={clubesLocais}
         setClubes={setClubesLocais}
         voltarAoClube={() => setClubeSelecionado(null)}
       />
@@ -75,7 +78,7 @@ const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes }) => {
         <h1>Clubes</h1>
         <div className="lista-clubes">
           {clubesLocais.map((clube) => (
-            <div key={clube.id} className="clube-container">
+            <div key={clube.cod} className="clube-container">
               <span>
                 {clube.emoji} {clube.nome}
               </span>
@@ -86,7 +89,7 @@ const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes }) => {
                 >
                   Editar
                 </button>
-                <button onClick={() => excluirClube(clube.id)}>Excluir</button>
+                <button onClick={() => excluirClube(clube.cod)}>Excluir</button>
               </div>
             </div>
           ))}

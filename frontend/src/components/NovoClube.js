@@ -37,8 +37,6 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
         return;
       }
 
-      console.log("Token->" + token);
-
       axios
         .post("http://localhost:4242/api/clube", novoClube, {
           headers: {
