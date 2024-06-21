@@ -17,17 +17,26 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   async function login(username, password) {
+    debugger;
     const credentials = {
       login: username,
       senha: password,
     };
+    console.log(credentials);
     const response = await axios
-      .get(`http://localhost:4242/auth/login`, {
-        credentials,
+      .post(`http://localhost:4242/auth/login`, credentials, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
       .then((res) => res.data);
 
-    let token = response[0].token;
+    console.log(response);
+
+    let token = response.token;
+
+    console.log(token);
+
     localStorage.setItem("user", JSON.stringify({ username, token }));
     setUser({ username, token });
     return;

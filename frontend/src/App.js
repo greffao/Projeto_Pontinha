@@ -110,7 +110,7 @@ function App() {
   // Sempre que o app for inicializado os clubes serão solicitados ao backend e serão passados aos componentes
   useEffect(() => {
     axios
-      .get("http://localhost:4242/api/clubes", {
+      .get("http://localhost:4242/api/clube", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -125,7 +125,7 @@ function App() {
   // Sempre que o app for inicializado os coordenadores serão solicitados ao backend e serão passados aos componentes
   useEffect(() => {
     axios
-      .get("http://localhost:4242/api/coordenadores", {
+      .get("http://localhost:4242/api/coordenador", {
         headers: {
           "Content-Type": "application/json",
         },
