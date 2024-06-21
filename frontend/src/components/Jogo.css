@@ -4,13 +4,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
     position: relative;
 }
 
 .imagem-quadrada {
-    max-width: 50%;
-    max-height: 50%;
+    max-width:40%;
+    max-height: 40%;
     width: auto;
     height: auto;
     display: block;
@@ -26,12 +25,13 @@
 
 .alternativas button {
     flex: 1;
+    font-size: 2px;
 }
 
 .clubes-container {
     width: 100%;
     flex: 1;
-    overflow-y: auto;
+    overflow: auto;
 }
 
 .botao-canto {
@@ -44,12 +44,13 @@
 
 .botao-nav {
     position: absolute;
-    right: 0;
-    bottom: 0;
     padding-right: 10px;
 }
 
 .botao-nav button {
+    position: absolute;
+    right: 6px;
+    bottom: 0;
     font-size: 12px;
 }
 
@@ -102,8 +103,39 @@
     align-items: center;
   }
   
-.jogo-container pergunta {
-    font-size: 30px;
+.perguntas {
+    max-height: 100px; 
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.botao-clube, .botao-tema {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff8c66;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+}
+
+.botao-clube img, .botao-tema img {
+    max-height: 100px;
+    max-width: 100px; 
+    margin-bottom: 5px; 
+}
+
+.botao-clube span, .botao-tema span {
+    display: block; 
 }
 
 /*Media Query para telas grandes*/
@@ -208,6 +240,12 @@
 
     .mensagem-final h1 {
         font-size: 15px;
+        margin-bottom: 5px;
+    }
+
+    .botao-clube img, .botao-tema img {
+        max-height: 50px;
+        max-width: 50px;
         margin-bottom: 5px;
     }
     
