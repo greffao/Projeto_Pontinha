@@ -1,8 +1,12 @@
-import { useState } from "react";
-import { Link } from "react-router-dom/dist";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom/dist";
+import axios from "axios";
+import { AuthContext } from "../context/auth";
 
 const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
   const [nomeClube, setNomeClube] = useState("");
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext); // pegar usuário atual
 
   const handleNomeChange = (e) => {
     setNomeClube(e.target.value);
@@ -18,15 +22,29 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
     if (nomeClube) {
       // Verifica se o nome não está vazio
       const novoClube = {
-        id: clubes.length + 1, // Atribui um novo ID baseado no comprimento do array
+        cod: clubes.length + 1, // Atribui um novo ID baseado no comprimento do array
         nome: nomeClube,
         emoji: "", // Emoji padrão, pode ser alterado depois
         temas: [], // Sem temas inicialmente
       };
 
+      // Recuperar token do localStorage
+      const token = user?.token || localStorage.getItem("user")?.token;
+
+      // Verificar se token está disponível
+      if(!token) {
+        alert("Usuário não autenticado.");
+        return;
+      }
+
+      console.log("Token->" + token);
+
       axios
-        .post("http://localhost:4242/api/clube", {
-          novoClube,
+        .post("http://localhost:4242/api/clube", novoClube, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          }
         })
         .then((res) => {
           console.log("Clube adicionado:", novoClube);
@@ -39,7 +57,7 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
           return err;
         });
       setNomeClube(""); // Limpa o campo de entrada
-      onEntrarClick();
+      navigate("/gerenciamento");
     } else {
       alert("Por favor, insira um nome para o clube."); // Alerta se o campo estiver vazio
     }

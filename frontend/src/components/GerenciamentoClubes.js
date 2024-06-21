@@ -12,6 +12,19 @@ const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes }) => {
   };
 
   useEffect(() => {
+      // essa lógica está acontecendo no main de forma duplicada, decidir como fazer isso direito
+      axios
+      .get("http://localhost:4242/api/clube", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => res.json())
+      .then((res) => {
+        setClubesLocais(res);
+      })
+      .catch((error) => console.error(error));
+
     setClubesLocais([...clubes]); // Sincroniza o estado local com a variável global na montagem
   }, []);
 
@@ -35,13 +48,13 @@ const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes }) => {
       .catch((error) => console.error(error));
 
     // Remove o clube da lista global
-    const index = clubes.findIndex((clube) => clube.id === clubeId);
+    const index = clubesLocais.findIndex((clube) => clube.id === clubeId);
     if (index > -1) {
-      clubes.splice(index, 1);
+      clubesLocais.splice(index, 1);
     }
 
     // Atualiza o estado local para forçar a re-renderização
-    setClubesLocais([...clubes]);
+    setClubesLocais([...clubesLocais]);
   };
 
   if (clubeSelecionado) {
@@ -61,7 +74,7 @@ const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes }) => {
       <div className="quadrado">
         <h1>Clubes</h1>
         <div className="lista-clubes">
-          {clubes.map((clube) => (
+          {clubesLocais.map((clube) => (
             <div key={clube.id} className="clube-container">
               <span>
                 {clube.emoji} {clube.nome}

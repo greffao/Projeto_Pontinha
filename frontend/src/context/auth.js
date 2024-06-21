@@ -5,24 +5,27 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
+
   useEffect(() => {
     const userToken = localStorage.getItem("user");
     const isLogged = localStorage.getItem("loggedIn");
     if (userToken) {
-      const username = JSON.parse(user).login;
-      const token = JSON.parse(user).token;
-
-      setUser({ username, token });
+      try {
+        const username = JSON.parse(user).login;
+        const token = JSON.parse(user).token;
+        setUser({ username, token });
+      } catch(error) {
+        console.error("Error parsing stored user data:", error);
+      }
     }
   }, []);
 
   async function login(username, password) {
-    debugger;
     const credentials = {
       login: username,
       senha: password,
     };
-    console.log(credentials);
+
     const response = await axios
       .post(`http://localhost:4242/auth/login`, credentials, {
         headers: {
@@ -31,11 +34,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => res.data);
 
-    console.log(response);
-
     let token = response.token;
-
-    console.log(token);
 
     localStorage.setItem("user", JSON.stringify({ username, token }));
     setUser({ username, token });
