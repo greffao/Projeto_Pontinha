@@ -5,17 +5,16 @@ import axios from "axios";
 
 const EditarCoordenador = ({ coordenador, onVoltarClick, onSalvarClick }) => {
     const [login, setLogin] = useState('');
-    const [oldLogin, setOldLogin] = useState('');
     const [senha, setSenha] = useState('');
     const { user } = useContext(AuthContext); // pegar usuário atual
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
+        // Tirei isso aqui para não mostrar qual o tamanho da senha
         if (coordenador) {
             setLogin(coordenador.login);
-            setOldLogin(coordenador.login);
-            setSenha(coordenador.senha);
+            // setSenha(coordenador.senha);
         }
     }, [coordenador]);
 
@@ -43,10 +42,8 @@ const EditarCoordenador = ({ coordenador, onVoltarClick, onSalvarClick }) => {
                 return;
             }
 
-            console.log(coordenadorEditado);
-
             axios
-            .put(`http://localhost:4242/api/coordenador/coordenador/${oldLogin}`, coordenadorEditado, {
+            .put(`http://localhost:4242/api/coordenador/coordenador/${coordenador.login}`, coordenadorEditado, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
@@ -81,14 +78,14 @@ const EditarCoordenador = ({ coordenador, onVoltarClick, onSalvarClick }) => {
                     type="text"
                     value={login}
                     onChange={handleLoginChange}
-                    placeholder="Login do Coordenador"
+                    placeholder="Novo Login do Coordenador"
                     className="input-coordenador"
                 />
                 <input
                     type="password"
                     value={senha}
                     onChange={handleSenhaChange}
-                    placeholder="Senha do Coordenador"
+                    placeholder="Novo Senha do Coordenador"
                     className="input-coordenador"
                 />
                 <Link to='/gerenciamento-coordenadores'>
