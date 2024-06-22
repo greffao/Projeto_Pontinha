@@ -55,6 +55,7 @@ const AreaCoordenacao = () => {
               className="input-field"
             />
           </div>
+          {error && <p style={{ color: 'red', textAlign: 'center'}}>{error}</p>}
           <button onClick={handleLogin}>Entrar</button>
         </div>
       </div>

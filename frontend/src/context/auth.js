@@ -26,19 +26,22 @@ export const AuthProvider = ({ children }) => {
       senha: password,
     };
 
-    const response = await axios
-      .post(`http://localhost:4242/auth/login`, credentials, {
+    try {
+      const response = await axios.post(`http://localhost:4242/auth/login`, credentials, {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         }
-      })
-      .then((res) => res.data);
-
-    let token = response.token;
-
-    localStorage.setItem("user", JSON.stringify({ username, token }));
-    setUser({ username, token });
-    return;
+      });
+      const { token } = response.data;
+      localStorage.setItem("user", JSON.stringify({ username, token }));
+      setUser({ username, token });
+      return null; // Indica sucesso
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return error.response.data; // Mensagem de erro específica do backend
+      }
+      return "Erro ao tentar fazer login."; // Mensagem de erro genérica
+    }
   }
 
   const signin = (username, password) => {
