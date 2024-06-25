@@ -32,10 +32,10 @@ Gerenciar Temas e Perguntas Parte 2
 
 API do Banco de Dados desenvolvido para o jogo educativo do Projeto Pontinha feito pela equipe 2A em conjunto com as professoras Rosana e Simone para a disciplina de Engenharia de Software (01/2024).
 
-Para executar uma instância da API em localhost, primeiro é necessário instalar as dependências necessárias:
+Para executar uma instância da API em localhost, primeiro é necessário instalar as dependências necessárias. ATENÇÃO: Esses comandos devem ser executados em nível de diretório `backend/`, e não na raiz do diretório `/`.
 
 ```bash
-npm i express mongoose cors bcrypt
+npm i express mongoose cors bcrypt bcryptjs jsonwebtoken
 ```
 
 Além disso, caso for trabalhar com o desenvolvimento da API, é necessário instalar dependências de desenvolvimento:
