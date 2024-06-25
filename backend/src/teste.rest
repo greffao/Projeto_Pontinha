@@ -6,12 +6,12 @@ Content-Type: application/json
 {
     "cod": 1,
     "nome": "Clube dos Animais",
-    "imagem": "clube_animais.png",
+    "imagem": "",
     "temas": [
         {
             "cod": 1,
             "nome": "Animais",
-            "imagem": "tema_animais.png",
+            "imagem": "",
             "perguntas": [
                 {
                     "cod": 1,
@@ -20,7 +20,7 @@ Content-Type: application/json
                     "alternativa_c": "Horse",
                     "alternativa_d": "Lion",
                     "questao": "Que animal é este?",
-                    "imagem": "animal.png"
+                    "imagem": "https://img.freepik.com/free-vector/cartoon-funny-cat-art-isolated-white_191095-342.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719187200&semt=ais_user"
                 },
                 {
                     "cod": 2,
@@ -62,12 +62,12 @@ Content-Type: application/json
 {
     "cod": 2,
     "nome": "História",
-    "imagem": "historia.png",
+    "imagem": "",
     "temas": [
         {
             "cod": 1,
             "nome": "Civilizações Antigas",
-            "imagem": "civilizacoes_antigas.png",
+            "imagem": "",
             "perguntas": [
                 {
                     "cod": 1,
@@ -76,7 +76,7 @@ Content-Type: application/json
                     "alternativa_c": "Incas",
                     "alternativa_d": "Aztecas",
                     "questao": "Qual civilização construiu as pirâmides?",
-                    "imagem": "piramides-egito.webp"
+                    "imagem": "https://static.todamateria.com.br/upload/as/pi/as-piramides-do-egito-og.jpg?class=ogImageRectangle"
                 },
                 {
                     "cod": 2,
@@ -85,7 +85,7 @@ Content-Type: application/json
                     "alternativa_c": "África",
                     "alternativa_d": "América",
                     "questao": "Em que continente estava localizada a Grécia Antiga?",
-                    "imagem": "grecia-antiga.webp"
+                    "imagem": "https://static.todamateria.com.br/upload/pa/rt/partenonematenas-cke.jpg?auto_optimize=low"
                 }
             ]
         }
@@ -100,12 +100,12 @@ Content-Type: application/json
 {
     "cod": 3,
     "nome": "Ciências",
-    "imagem": "ciencias.png",
+    "imagem": "",
     "temas": [
         {
             "cod": 1,
             "nome": "Corpo Humano",
-            "imagem": "corpo_humano.png",
+            "imagem": "https://www.infoescola.com/wp-content/uploads/2022/08/movimentos-corpo-humano-195920945.jpg",
             "perguntas": [
                 {
                     "cod": 1,
@@ -114,7 +114,7 @@ Content-Type: application/json
                     "alternativa_c": "Rim",
                     "alternativa_d": "Fígado",
                     "questao": "Qual órgão é responsável pela respiração?",
-                    "imagem": "orgaos.webp"
+                    "imagem": "https://img.freepik.com/vetores-gratis/pulmao-anatomia-humana-biologia-orgao-corpo-sistema-saude-e-medico-mao-desenhada-desenho-arte-illustration_56104-958.jpg?size=626&ext=jpg&ga=GA1.1.1141335507.1719014400&semt=sph"
                 },
                 {
                     "cod": 2,
@@ -123,7 +123,7 @@ Content-Type: application/json
                     "alternativa_c": "Perna",
                     "alternativa_d": "Tronco",
                     "questao": "Qual é a maior parte do corpo humano?",
-                    "imagem": "corpo-humano.wepb"
+                    "imagem": "https://www.infoescola.com/wp-content/uploads/2022/08/movimentos-corpo-humano-195920945.jpg"
                 }
             ]
         }

@@ -34,7 +34,7 @@ const clubeController = {
                 res.status(404).json({msg: "Clube não encontrado"});
                 return;
             }
-            res.json(club);
+            res.json(clube);
         }
         catch (error){
             console.log(error);
@@ -64,8 +64,8 @@ const clubeController = {
             cod: req.body.cod,
             nome: req.body.nome,
             imagem: req.body.imagem,
-            perguntas: req.body.perguntas
-         };
+            temas: req.body.temas
+        };
 
         const clubeAtualizado = await ClubeModel.findOneAndUpdate({cod: cod}, clube);
 

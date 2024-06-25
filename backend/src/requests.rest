@@ -37,12 +37,12 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:4242/api/coordenador
+POST http://localhost:4242/auth/register/
 Content-Type: application/json
 
 {
-    "login": "LuizRicardo",
-    "senha": "sqlmaster123"
+    "login": "vinicin",
+    "senha": "admin123"
 }
 
 ###
@@ -55,12 +55,12 @@ GET http://localhost:4242/api/coordenador/LuizRicardo
 DELETE http://localhost:4242/api/coordenador/LuizRicardo
 
 ###
-PUT http://localhost:4242/api/coordenador/LuizRicardo
+POST http://localhost:4242/auth/login/
 Content-Type: application/json
 
 {
-    "login": "LuizRicardo",
-    "senha": "sqlmaster3224"
+    "login": "vinicin",
+    "senha": "admin123"
 }
 
 ###
@@ -110,6 +110,9 @@ GET http://localhost:4242/api/clube/1
 
 ###
 DELETE http://localhost:4242/api/clube/1
+{
+    "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Nzk2ZTc2YjI0NjVjNGY1NGJiMzdhNyIsImxvZ2luIjoidmluaWNpbiIsImlhdCI6MTcxOTI3Njg0NSwiZXhwIjoxNzE5MjgwNDQ1fQ.93g5OGN29UjcbTccPLXC3xoBPPeF-xgPFmYcsEPIM5s"
+}
 
 ###
 PUT http://localhost:4242/api/clube/1

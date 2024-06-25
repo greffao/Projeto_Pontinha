@@ -30,7 +30,6 @@ async function register(request, response) {
 }
 
 async function login(request, response) {
-    debugger;
     const { login, senha } = request.body;
 
     if (!senha || !login) {
