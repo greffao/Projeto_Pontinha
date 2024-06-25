@@ -4,20 +4,15 @@ import EditarCoordenador from './EditarCoordenador'; // Importar o componente de
 import { AuthContext } from "../context/auth";
 import axios from "axios";
 
-const GerenciamentoCoordenadores = ({ onVoltarClick, onNovoCoordenador, coordenadores }) => {
+const GerenciamentoCoordenadores = ({ onVoltarClick, onNovoCoordenador}) => {
+    const { user } = useContext(AuthContext); // pegar usuário atual
     const [coordenadoresLocais, setCoordenadoresLocais] = useState([]);
     const [coordenadorSelecionado, setCoordenadorSelecionado] = useState(null);
-    const [token, setToken] = useState(localStorage.getItem("user")?.token)
-    const { user } = useContext(AuthContext); // pegar usuário atual
+    const token = user?.token || localStorage.getItem("user")?.token; // Recuperar token do localStorage
+    
 
-    const handleSelecionarCoordenador = coordenador => {
-        setCoordenadorSelecionado(coordenador);
-    };
 
     useEffect(() => {
-        // Recuperar token do localStorage
-        const token = user?.token || localStorage.getItem("user")?.token;
-
         // Verificar se token está disponível
         if(!token) {
             alert("Usuário não autenticado.");
@@ -31,18 +26,12 @@ const GerenciamentoCoordenadores = ({ onVoltarClick, onNovoCoordenador, coordena
         }
         })
         .then((res) => {
-        console.log(res.data);
         setCoordenadoresLocais(res.data);
         })
         .catch((error) => console.error(error));
-
-        console.log(coordenadoresLocais);
-    }, [coordenadores]);
+    }, []);
 
     const excluirCoordenador = (coordenadorLogin) => {
-        // Recuperar token do localStorage
-        const token = user?.token || localStorage.getItem("user")?.token;
-
         // Verificar se token está disponível
         if(!token) {
             alert("Usuário não autenticado.");
@@ -69,22 +58,12 @@ const GerenciamentoCoordenadores = ({ onVoltarClick, onNovoCoordenador, coordena
         .catch((error) => console.error(error));
     };
 
-    const handleSalvarCoordenador = (coordenadorEditado) => {
-        // aqui eh cod, não id
-        const index = coordenadores.findIndex(c => c.id === coordenadorEditado.id);
-        if (index > -1) {
-            coordenadores[index] = coordenadorEditado;
-            setCoordenadoresLocais([...coordenadores]);
-            setCoordenadorSelecionado(null);
-        }
-    };
 
     if (coordenadorSelecionado) {
         return (
             <EditarCoordenador
                 coordenador={coordenadorSelecionado}
                 onVoltarClick={() => setCoordenadorSelecionado(null)}
-                onSalvarClick={handleSalvarCoordenador}
             />
         );
     }
@@ -98,7 +77,7 @@ const GerenciamentoCoordenadores = ({ onVoltarClick, onNovoCoordenador, coordena
                         <div key={coordenador.cod} className="coordenador-container">
                             <span>{coordenador.login}</span>
                             <div>
-                                <button style={{ marginRight: '15px' }} onClick={() => handleSelecionarCoordenador(coordenador)}>Editar</button>
+                                <button style={{ marginRight: '15px' }} onClick={() => setCoordenadorSelecionado(coordenador)}>Editar</button>
                                 <button onClick={() => excluirCoordenador(coordenador.login)}>Excluir</button>
                             </div>
                         </div>

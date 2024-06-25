@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react';
+import { AuthContext } from "../context/auth";
+import axios from "axios";
 
-const NovaPergunta = ({ onVoltarClick, tema }) => {
+const NovaPergunta = ({ onVoltarClick, tema, clube }) => {
     const [questao, setQuestao] = useState('');
     const [alternativas, setAlternativas] = useState(["", "", "", ""]);
-    const [respostaCorreta, setRespostaCorreta] = useState('');
+    const { user } = useContext(AuthContext); // pegar usuário atual
 
     const handleQuestaoChange = (e) => {
         setQuestao(e.target.value);
@@ -18,22 +20,50 @@ const NovaPergunta = ({ onVoltarClick, tema }) => {
     const handleCriarPergunta = () => {
         if (questao && alternativas.every(alternativa => alternativa)) {
             const novaPergunta = {
-                questao,
-                alternativas,
-                respostaCorreta,
-                imagemUrl: ''
+               cod: tema.perguntas[-1].cod + 1, //Pegamos o codigo da ultima pergunta no bd
+               alternativa_a: alternativas[0],
+               alternativa_b: alternativas[1],
+               alternativa_c: alternativas[2],
+               alternativa_d: alternativas[3],
+               questao: questao,
+               imagem: ''
             };
+
+            // Recuperar token do localStorage
+            const token = user?.token || localStorage.getItem("user")?.token;
+
+            // Verificar se token está disponível
+            if(!token) {
+                alert("Usuário não autenticado.");
+                return;
+            }
+
             tema.perguntas.push(novaPergunta);
-            console.log('Pergunta adicionada:', novaPergunta);
+            const updatedClub= {
+                cod: clube.cod,
+                nome: clube.nome,
+                imagem: clube.imagem,
+                temas: tema,
+            }
+            axios
+            .put(`http://localhost:4242/api/clube/${clube.cod}`,updatedClub, {
+                headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+            })
+            .then((res) => {
+                console.log("Pergunta criada com sucesso:", res.data);
+            })
+            .catch((error) => console.error(error));
             setQuestao('');
             setAlternativas(["", "", "", ""]);
-            setRespostaCorreta('');
             onVoltarClick();
         } else {
             alert('Por favor, insira uma questão e todas as alternativas.');
         }
     };
-
+//TODO: adicionar o iput da imagem
     return (
         <div className='home-container'>
             <div className='quadrado'>

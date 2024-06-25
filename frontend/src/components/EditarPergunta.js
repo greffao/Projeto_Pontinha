@@ -1,16 +1,26 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react';
+import axios from "axios";
+import { AuthContext } from "../context/auth";
 
-const EditarPergunta = ({ onVoltarClick, pergunta }) => {
+
+const EditarPergunta = ({ onVoltarClick, pergunta, tema, clube }) => {
     const [questao, setQuestao] = useState('');
     const [alternativas, setAlternativas] = useState([]);
+    const { user } = useContext(AuthContext); // pegar usuário atual
 
-    console.log(pergunta);
 
     // Asegurar que todos os dados estão carregados antes de usá-los
     useEffect(() => {
         if (pergunta) {
             setQuestao(pergunta.questao);
-            setAlternativas(pergunta.alternativas || []);
+            const alternativas = [
+                pergunta.alternativa_a,
+                pergunta.alternativa_b,
+                pergunta.alternativa_c,
+                pergunta.alternativa_d,
+
+            ];
+            setAlternativas(alternativas);
         }
     }, [pergunta]);
 
@@ -23,6 +33,55 @@ const EditarPergunta = ({ onVoltarClick, pergunta }) => {
         newAlternativas[index] = value;
         setAlternativas(newAlternativas);
     };
+
+    const alterarPergunta = (perguntaId) => {
+        if (questao && alternativas.every(alternativa => alternativa)) {
+            const updatedPergunta = {
+               cod: perguntaId,
+               alternativa_a: alternativas[0],
+               alternativa_b: alternativas[1],
+               alternativa_c: alternativas[2],
+               alternativa_d: alternativas[3],
+               questao: questao,
+               imagem: ''
+            };
+
+            // Recuperar token do localStorage
+            const token = user?.token || localStorage.getItem("user")?.token;
+
+            // Verificar se token está disponível
+            if(!token) {
+                alert("Usuário não autenticado.");
+                return;
+            }
+            const perguntas = tema.perguntas.filter(pergunta => pergunta.cod !== perguntaId);
+            tema.perguntas = perguntas;
+            tema.perguntas.push(updatedPergunta)
+
+            const updatedClub= {
+                cod: clube.cod,
+                nome: clube.nome,
+                imagem: clube.imagem,
+                temas: tema,
+            }
+            axios
+            .put(`http://localhost:4242/api/clube/${clube.cod}`,updatedClub, {
+                headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+            })
+            .then((res) => {
+                console.log("Pergunta criada com sucesso:", res.data);
+            })
+            .catch((error) => console.error(error));
+            setQuestao('');
+            setAlternativas(["", "", "", ""]);
+            onVoltarClick();
+        } else {
+            alert('Por favor, insira uma questão e todas as alternativas.');
+        }
+    }
 
     return (
         <div className='home-container'>
@@ -51,7 +110,7 @@ const EditarPergunta = ({ onVoltarClick, pergunta }) => {
                     <button onClick={onVoltarClick}>Cancelar</button>
                 </div>
                 <div className='botao-nav'>
-                    <button onClick={onVoltarClick}>Salvar Alterações</button>
+                    <button onClick={() => alterarPergunta(pergunta.cod)}>Salvar Alterações</button>
                 </div>
             </div>
         </div>

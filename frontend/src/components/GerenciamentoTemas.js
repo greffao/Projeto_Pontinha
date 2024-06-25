@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import GerenciamentoPerguntas from './GerenciamentoPerguntas';
 import { Link } from 'react-router-dom/dist';
+import { AuthContext } from "../context/auth";
+import axios from "axios";
 
 const GerenciamentoTemas = ({ clubeInicial, clubes, setClubes, voltarAoClube, onNovoTema }) => {
+    const { user } = useContext(AuthContext); // pegar usuário atual
+    const token = user?.token || localStorage.getItem("user")?.token; // Recuperar token do localStorage
+
     const [clube, setClube] = useState(clubeInicial);
     const [clubesLocais, setClubesLocais] = useState(clubes);
     const [temaSelecionado, setTemaSelecionado] = useState(null);
@@ -20,23 +25,55 @@ const GerenciamentoTemas = ({ clubeInicial, clubes, setClubes, voltarAoClube, on
     }, [clubeInicial, clubes]);
 
     const excluirTema = (temaId) => {
-        const temasAtualizados = clube.temas.filter(tema => tema.id !== temaId);
-        const clubeAtualizado = { ...clube, temas: temasAtualizados };
+        debugger;
+        // Verificar se token está disponível
+        if(!token) {
+            alert("Usuário não autenticado.");
+            return;
+        }
 
-        // Atualiza o estado local do clube
-        setClube(clubeAtualizado);
+        // Mostrar pop-up de confirmação
+        const confirmacao = window.confirm("Tem certeza que deseja excluir este tema?");
 
-        // Atualiza a lista global de clubes de forma imutável
-        const clubesAtualizados = clubesLocais.map(c => c.id === clube.id ? clubeAtualizado : c);
-        setClubes(clubesAtualizados);
+        if (!confirmacao) {
+            return; // Se o usuário clicar em "Cancelar", interrompe a execução
+        }
+        const temas = clube.temas.filter(tema => tema.cod !== temaId);
+        const updatedClub= {
+            cod: clube.cod,
+            nome: clube.nome,
+            imagem: clube.imagem,
+            temas: temas,
+        }
+        axios
+        .put(`http://localhost:4242/api/clube/${clube.cod}`,updatedClub, {
+            headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          }
+        })
+        .then((res) => {
+            console.log("Tema excluído com sucesso:", res.data);
+            const temasAtualizados = clube.temas.filter(tema => tema.id !== temaId);
+            const clubeAtualizado = { ...clube, temas: temasAtualizados };
 
-        // Opcionalmente, atualiza os clubes locais se necessário para forçar a re-renderização
-        // Não é estritamente necessário se setClubes já re-renderiza os consumidores
-        setClubesLocais(clubesAtualizados);
+            // Atualiza o estado local do clube
+            setClube(clubeAtualizado);
+
+            // Atualiza a lista global de clubes de forma imutável
+            const clubesAtualizados = clubesLocais.map(c => c.id === clube.id ? clubeAtualizado : c);
+
+            setClubes(clubesAtualizados);
+
+            // Opcionalmente, atualiza os clubes locais se necessário para forçar a re-renderização
+            // Não é estritamente necessário se setClubes já re-renderiza os consumidores
+            setClubesLocais(clubesAtualizados);
+        })
+        .catch((error) => console.error(error));
     };
 
     if(temaSelecionado) {
-        return <GerenciamentoPerguntas temaInicial={temaSelecionado} voltarAoTema={() => setTemaSelecionado(null)}/>;
+        return <GerenciamentoPerguntas clubeInicial={clubeInicial} temaInicial={temaSelecionado} voltarAoTema={() => setTemaSelecionado(null)}/>;
     }
 
     return (
@@ -49,7 +86,7 @@ const GerenciamentoTemas = ({ clubeInicial, clubes, setClubes, voltarAoClube, on
                             <span>{tema.nome}</span>
                             <div>
                                 <button style={{ marginRight: '15px' }} onClick={() => handleSelecionarTema(tema)}>Editar</button>
-                                <button onClick={() => excluirTema(tema.id)}>Excluir Tema</button>
+                                <button onClick={() => excluirTema(tema.cod)}>Excluir Tema</button>
                             </div>
                         </div>
                     ))}

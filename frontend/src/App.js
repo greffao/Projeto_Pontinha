@@ -21,7 +21,7 @@ import axios from "axios";
 
 /*Variável global temporária enquanto a gente
 não tem o BD*/
-const clubes = [
+const clubs = [
     { 
         id: 1, 
         nome: 'Inglês', 
@@ -402,27 +402,27 @@ function App() {
           "Content-Type": "application/json",
         },
       })
-      .then((res) => res.json())
       .then((res) => {
-        setClubes(res);
+        console.log(res);
+        setClubes(res.data);
       })
       .catch((error) => console.error(error));
-  });
+  },[]);
 
   // Sempre que o app for inicializado os coordenadores serão solicitados ao backend e serão passados aos componentes
-  useEffect(() => {
-    axios
-      .get("http://localhost:4242/api/coordenador", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => res.json())
-      .then((res) => {
-        setCoordenadores(res);
-      })
-      .catch((error) => console.error(error));
-  });
+//   useEffect(() => {
+//     axios
+//       .get("http://localhost:4242/api/coordenador", {
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       })
+//       .then((res) => res.json())
+//       .then((res) => {
+//         setCoordenadores(res);
+//       })
+//       .catch((error) => console.error(error));
+//   });
 
   //todas as rotas dentro do ProtectedRoute precisam que o usuário esteja logado para serem acessadas
   const ProtectedRoute = ({ isAllowed, redirectPath = "/", children }) => {
@@ -458,7 +458,7 @@ function App() {
               <Route
                 path="/gerenciamento-coordenadores"
                 element={
-                  <GerenciamentoCoordenadores coordenadores={coordenadores} />
+                  <GerenciamentoCoordenadores />
                 }
                 exact
               />

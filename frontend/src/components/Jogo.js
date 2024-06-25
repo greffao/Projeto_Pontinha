@@ -60,7 +60,13 @@ const Jogo = ({ onVoltarClick, clubes }) => {
     };
 
     const shuffleAlternativas = () => {
-        const alternativasEmbaralhadas = [...temaSelecionado.perguntas[perguntaAtual].alternativas];
+        const alternativasEmbaralhadas = [
+            temaSelecionado.perguntas[perguntaAtual].alternativa_a,
+            temaSelecionado.perguntas[perguntaAtual].alternativa_b,
+            temaSelecionado.perguntas[perguntaAtual].alternativa_c,
+            temaSelecionado.perguntas[perguntaAtual].alternativa_d,
+
+        ];
 
         for (let i = alternativasEmbaralhadas.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -71,7 +77,7 @@ const Jogo = ({ onVoltarClick, clubes }) => {
 
     const handleTemaSelecionado = (tema) => {
         setTemaSelecionado(tema);
-        const primeirasAlternativas = tema.perguntas.map((pergunta) => pergunta.alternativas[0]);
+        const primeirasAlternativas = tema.perguntas.map((pergunta) => pergunta.alternativa_a);
         setPrimeirasAlternativasCorretas(primeirasAlternativas);
     };
 
@@ -103,7 +109,7 @@ const Jogo = ({ onVoltarClick, clubes }) => {
                         <div className='clubes'>
                             {clubes.map(clube => (
                                 <button key={clube.id} className='botao-clube' onClick={() => setClubeSelecionado(clube)}>
-                                    <img src={require(`../temp_images/${clube.imagem}`)} alt={clube.nome} />
+                                    <img src={clube.imagem} alt={clube.nome} />
                                     <span>{clube.nome}</span>
                                 </button>
                             ))}
@@ -123,7 +129,7 @@ const Jogo = ({ onVoltarClick, clubes }) => {
                         <div className='clubes'>
                             {clubeSelecionado.temas.map((tema, index) => (
                                 <button key={index} className='botao-tema' onClick={() => handleTemaSelecionado(tema)}>
-                                    <img src={require(`../temp_images/${tema.imagem}`)} alt={tema.nome} />
+                                    <img src={tema.imagem} alt={tema.nome} />
                                     <span>{tema.nome}</span>
                                 </button>
                             ))}
@@ -138,7 +144,7 @@ const Jogo = ({ onVoltarClick, clubes }) => {
                     <div className='clubes-container'>
                         <h2>{temaSelecionado.nome}</h2>
                         <p className='perguntas' ref={perguntaRef}>{temaSelecionado.perguntas[perguntaAtual].questao}</p>
-                        <img className='imagem-quadrada' ref={imagemRef} onLoad={adjustImageHeight} src={require(`../temp_images/${temaSelecionado.perguntas[perguntaAtual].imagemUrl}`)} alt="Question Image" />
+                        <img className='imagem-quadrada' onLoad={adjustImageHeight} src={temaSelecionado.perguntas[perguntaAtual].imagem} alt="Question Image" />
                         <div className='alternativas'>
                         {alternativasEmbaralhadas.map((alt, index) => (
                             <button 

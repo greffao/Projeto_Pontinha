@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom/dist';
 import { AuthContext } from "../context/auth";
 import axios from "axios";
 
-const EditarCoordenador = ({ coordenador, onVoltarClick, onSalvarClick }) => {
+const EditarCoordenador = ({ coordenador, onVoltarClick }) => {
     const [login, setLogin] = useState('');
     const [senha, setSenha] = useState('');
     const { user } = useContext(AuthContext); // pegar usuário atual
@@ -55,7 +55,8 @@ const EditarCoordenador = ({ coordenador, onVoltarClick, onSalvarClick }) => {
                     adicionarCoordenador(coordenadorEditado);
                 }
                 alert("Coordenador editado com sucesso:", res.data);
-                navigate("/gerenciamento-coordenadores");
+                onVoltarClick();
+                navigate('/gerenciamento-coordenadores');
             })
             .catch((error) => {
                 // pega mensagem do erro do backend e mostra se tiver

@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import NovaPergunta from './NovaPergunta';
 import EditarPergunta from './EditarPergunta';
+import { AuthContext } from "../context/auth";
+import axios from "axios";
 
-const GerenciamentoPerguntas = ({ temaInicial, voltarAoTema }) => {
+const GerenciamentoPerguntas = ({ clubeInicial, temaInicial, voltarAoTema }) => {
     const [onCriarPergunta, setCriarPergunta] = useState(null);
     const [onEditarPergunta, setEditarPergunta] = useState(null);
+    const { user } = useContext(AuthContext); // pegar usuário atual
 
     const handleNovaPergunta = tema => {
         setCriarPergunta(tema);
@@ -14,13 +17,53 @@ const GerenciamentoPerguntas = ({ temaInicial, voltarAoTema }) => {
         setEditarPergunta(pergunta);
     }
 
+    const excluirPergunta = (perguntaId) => {
+        debugger;
+        // Recuperar token do localStorage
+        const token = user?.token || localStorage.getItem("user")?.token;
+
+        // Verificar se token está disponível
+        if(!token) {
+        alert("Usuário não autenticado.");
+        return;
+        }
+
+        // Mostrar pop-up de confirmação
+        const confirmacao = window.confirm("Tem certeza que deseja excluir esta pergunta?");
+
+        if (!confirmacao) {
+        return; // Se o usuário clicar em "Cancelar", interrompe a execução
+        }
+        const perguntas = temaInicial.perguntas.filter(pergunta => pergunta.cod !== perguntaId);
+        temaInicial.perguntas = perguntas;
+        const temas = clubeInicial.temas.filter(tema => tema.cod !== temaInicial.cod);
+        temas.push(temaInicial);
+        const updatedClub= {
+            cod: clubeInicial.cod,
+            nome: clubeInicial.nome,
+            imagem: clubeInicial.imagem,
+            temas: temas,
+        }
+        axios
+        .put(`http://localhost:4242/api/clube/${clubeInicial.cod}`,updatedClub, {
+            headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          }
+        })
+        .then((res) => {
+            console.log("Pergunta excluída com sucesso:", res.data);
+        })
+        .catch((error) => console.error(error));
+
+    }
+
     if(onCriarPergunta) {
-        return <NovaPergunta onVoltarClick={() => setCriarPergunta(null)} tema={onCriarPergunta}/>;
+        return <NovaPergunta onVoltarClick={() => setCriarPergunta(null)} tema={onCriarPergunta} clube={clubeInicial}/>;
     }
 
     if(onEditarPergunta) {
-        // console.log(onEditarPergunta);
-        return <EditarPergunta onVoltarClick={() => setEditarPergunta(null)} pergunta={onEditarPergunta}/>;
+        return <EditarPergunta onVoltarClick={() => setEditarPergunta(null)} pergunta={onEditarPergunta} tema={temaInicial} clube={clubeInicial}/>;
     }
 
     return (
@@ -32,7 +75,7 @@ const GerenciamentoPerguntas = ({ temaInicial, voltarAoTema }) => {
                         <div key={index} className="clube-container">
                             <span>Pergunta: {pergunta.questao}</span>
                             <button style={{ marginRight: '15px' }} onClick={() => handleEditarPergunta(pergunta)}>Editar</button>
-                            <button onClick={() => console.log("Excluir pergunta")}>Excluir Pergunta</button>
+                            <button onClick={() => excluirPergunta(pergunta.cod)}>Excluir Pergunta</button>
                         </div>
                     ))}
                 </div>

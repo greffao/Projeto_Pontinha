@@ -4,30 +4,14 @@ import { Link } from "react-router-dom/dist";
 import { AuthContext } from "../context/auth";
 import axios from "axios";
 
-const GerenciamentoClubes = ({ onVoltarClick, onNovoClube }) => {
-  const [clubesLocais, setClubesLocais] = useState([]);
+const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes }) => {
+  const [clubesLocais, setClubesLocais] = useState(clubes);
   const [clubeSelecionado, setClubeSelecionado] = useState(null);
   const { user } = useContext(AuthContext); // pegar usuário atual
 
   const handleSelecionarClube = (clube) => {
     setClubeSelecionado(clube);
   };
-
-  useEffect(() => {
-    debugger;
-    // essa lógica está acontecendo no main de forma duplicada, decidir como fazer isso direito
-    axios
-    .get("http://localhost:4242/api/clube", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    .then((res) => {
-      console.log(res.data);
-      setClubesLocais(res.data);
-    })
-    .catch((error) => console.error(error));
-  }, []);
 
   const excluirClube = (clubeId) => {
     // Recuperar token do localStorage

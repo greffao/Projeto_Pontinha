@@ -13,7 +13,7 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
   };
 
   const handleAlterarImagem = () => {
-    // Placeholder para função que altera a imagem
+    // TODO: Placeholder para função que altera a imagem
     console.log("Alterar imagem para o clube:", nomeClube);
   };
 
@@ -22,9 +22,9 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
     if (nomeClube) {
       // Verifica se o nome não está vazio
       const novoClube = {
-        cod: clubes.length + 1, // Atribui um novo ID baseado no comprimento do array
+        cod: clubes[-1].cod + 1, // Atribui um novo ID baseado no comprimento do array
         nome: nomeClube,
-        emoji: "", // Emoji padrão, pode ser alterado depois
+        imagem: "",
         temas: [], // Sem temas inicialmente
       };
 
