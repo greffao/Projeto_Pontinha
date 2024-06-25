@@ -1,14 +1,20 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom/dist';
+import { useState, useEffect, useContext } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom/dist';
+import { AuthContext } from "../context/auth";
+import axios from "axios";
 
 const EditarCoordenador = ({ coordenador, onVoltarClick, onSalvarClick }) => {
     const [login, setLogin] = useState('');
     const [senha, setSenha] = useState('');
+    const { user } = useContext(AuthContext); // pegar usuário atual
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
+        // Tirei isso aqui para não mostrar qual o tamanho da senha
         if (coordenador) {
             setLogin(coordenador.login);
-            setSenha(coordenador.senha);
+            // setSenha(coordenador.senha);
         }
     }, [coordenador]);
 
@@ -22,8 +28,43 @@ const EditarCoordenador = ({ coordenador, onVoltarClick, onSalvarClick }) => {
 
     const handleSalvar = () => {
         if (login && senha) {
-            const coordenadorEditado = { ...coordenador, login, senha };
-            onSalvarClick(coordenadorEditado);
+            const coordenadorEditado = { login, senha };
+
+            setLogin(''); // Limpa o campo de entrada
+            setSenha(''); // Limpa o campo de entrada
+
+            // Recuperar token do localStorage
+            const token = user?.token || localStorage.getItem("user")?.token;
+
+            // Verificar se token está disponível
+            if(!token) {
+                alert("Usuário não autenticado.");
+                return;
+            }
+
+            axios
+            .put(`http://localhost:4242/api/coordenador/coordenador/${coordenador.login}`, coordenadorEditado, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then((res) => {
+                const adicionarCoordenador = location.state?.adicionarCoordenador;
+                if (adicionarCoordenador) {
+                    adicionarCoordenador(coordenadorEditado);
+                }
+                alert("Coordenador editado com sucesso:", res.data);
+                navigate("/gerenciamento-coordenadores");
+            })
+            .catch((error) => {
+                // pega mensagem do erro do backend e mostra se tiver
+                if (error.response && error.response.data) {
+                    alert(error.response.data);
+                } else {
+                    alert("Erro ao adicionar coordenador.");
+                }
+            });
         } else {
             alert('Por favor, preencha todos os campos.');
         }
@@ -37,14 +78,14 @@ const EditarCoordenador = ({ coordenador, onVoltarClick, onSalvarClick }) => {
                     type="text"
                     value={login}
                     onChange={handleLoginChange}
-                    placeholder="Login do Coordenador"
+                    placeholder="Novo Login do Coordenador"
                     className="input-coordenador"
                 />
                 <input
                     type="password"
                     value={senha}
                     onChange={handleSenhaChange}
-                    placeholder="Senha do Coordenador"
+                    placeholder="Novo Senha do Coordenador"
                     className="input-coordenador"
                 />
                 <Link to='/gerenciamento-coordenadores'>

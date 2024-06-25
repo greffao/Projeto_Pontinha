@@ -1,68 +1,117 @@
-import { useState, useEffect } from 'react'
-import GerenciamentoTemas from './GerenciamentoTemas';
-import { Link } from 'react-router-dom/dist';
+import { useState, useEffect, useContext } from "react";
+import GerenciamentoTemas from "./GerenciamentoTemas";
+import { Link } from "react-router-dom/dist";
+import { AuthContext } from "../context/auth";
+import axios from "axios";
 
-const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes }) => {
-    const [clubesLocais, setClubesLocais] = useState([]);
-    const [clubeSelecionado, setClubeSelecionado] = useState(null);
+const GerenciamentoClubes = ({ onVoltarClick, onNovoClube }) => {
+  const [clubesLocais, setClubesLocais] = useState([]);
+  const [clubeSelecionado, setClubeSelecionado] = useState(null);
+  const { user } = useContext(AuthContext); // pegar usuário atual
 
-    const handleSelecionarClube = clube => {
-        setClubeSelecionado(clube);
-    };
+  const handleSelecionarClube = (clube) => {
+    setClubeSelecionado(clube);
+  };
 
-    useEffect(() => {
-        setClubesLocais([...clubes]); // Sincroniza o estado local com a variável global na montagem
-    }, []);
+  useEffect(() => {
+    debugger;
+    // essa lógica está acontecendo no main de forma duplicada, decidir como fazer isso direito
+    axios
+    .get("http://localhost:4242/api/clube", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      console.log(res.data);
+      setClubesLocais(res.data);
+    })
+    .catch((error) => console.error(error));
+  }, []);
 
-    const excluirClube = (clubeId) => {
-        // Remove o clube da lista global
-        const index = clubes.findIndex(clube => clube.id === clubeId);
-        if (index > -1) {
-            clubes.splice(index, 1);
-        }
+  const excluirClube = (clubeId) => {
+    // Recuperar token do localStorage
+    const token = user?.token || localStorage.getItem("user")?.token;
 
-        // Atualiza o estado local para forçar a re-renderização
-        setClubesLocais([...clubes]);
-    };
-
-    if (clubeSelecionado) {
-        console.log(clubeSelecionado);
-        return <GerenciamentoTemas clubeInicial={clubeSelecionado} clubes={clubes} setClubes={setClubesLocais} voltarAoClube={() => setClubeSelecionado(null)} />;
+    // Verificar se token está disponível
+    if(!token) {
+      alert("Usuário não autenticado.");
+      return;
     }
 
+    // Mostrar pop-up de confirmação
+    const confirmacao = window.confirm("Tem certeza que deseja excluir este clube?");
+
+    if (!confirmacao) {
+      return; // Se o usuário clicar em "Cancelar", interrompe a execução
+    }
+
+    axios
+      .delete(`http://localhost:4242/api/clube/${clubeId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((res) => {
+        console.log("Clube excluído com sucesso:", res.data);
+        setClubesLocais(clubesLocais.filter((clube) => clube.cod !== clubeId));
+      })
+      .catch((error) => console.error(error));
+  };
+
+  // essa é uma boa parte para refatorar com routers talvez
+  if (clubeSelecionado) {
+    console.log(clubeSelecionado);
     return (
-        <div className='home-container'>
-            <div className='quadrado'>
-                <h1>Clubes</h1>
-                <div className='lista-clubes'>
-                    {clubes.map((clube) => (
-                        <div key={clube.id} className="clube-container">
-                            <span>{clube.emoji} {clube.nome}</span>
-                            <div>
-                                <button style={{ marginRight: '15px' }} onClick={() => handleSelecionarClube(clube)}>Editar</button>
-                                <button onClick={() => excluirClube(clube.id)}>Excluir</button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                <Link to='/area-coordenacao'>
-                    <div className='botao-canto'>
-                        <button onClick={onVoltarClick}>Voltar</button>
-                    </div>
-                </Link>
-                <Link to='/gerenciamento-coordenadores'>
-                    <div>
-                        <button>Alterar Coordenadores</button>
-                    </div>
-                </Link>
-                <Link to='/novo-clube'>
-                    <div className='botao-nav'>
-                        <button onClick={onNovoClube}>Novo Clube</button>
-                    </div>
-                </Link>
-            </div>
-        </div>
+      <GerenciamentoTemas
+        clubeInicial={clubeSelecionado}
+        clubes={clubesLocais}
+        setClubes={setClubesLocais}
+        voltarAoClube={() => setClubeSelecionado(null)}
+      />
     );
-}
+  }
+
+  return (
+    <div className="home-container">
+      <div className="quadrado">
+        <h1>Clubes</h1>
+        <div className="lista-clubes">
+          {clubesLocais.map((clube) => (
+            <div key={clube.cod} className="clube-container">
+              <span>
+                {clube.emoji} {clube.nome}
+              </span>
+              <div>
+                <button
+                  style={{ marginRight: "15px" }}
+                  onClick={() => handleSelecionarClube(clube)}
+                >
+                  Editar
+                </button>
+                <button onClick={() => excluirClube(clube.cod)}>Excluir</button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <Link to="/area-coordenacao">
+          <div className="botao-canto">
+            <button onClick={onVoltarClick}>Voltar</button>
+          </div>
+        </Link>
+        <Link to="/gerenciamento-coordenadores">
+          <div>
+            <button>Alterar Coordenadores</button>
+          </div>
+        </Link>
+        <Link to="/novo-clube">
+          <div className="botao-nav">
+            <button onClick={onNovoClube}>Novo Clube</button>
+          </div>
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 export default GerenciamentoClubes;
