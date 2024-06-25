@@ -2,6 +2,7 @@
 
 Lucas Greff Meneses - 13671615
 Yuri Fernandes Pereira - 13730127
+Felipi Yuri Santos - 11917292
 
 Universidade de São Paulo
 Instituto de Ciências Matemáticas e de Computação
