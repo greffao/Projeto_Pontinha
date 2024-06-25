@@ -36,8 +36,7 @@ const GerenciamentoPerguntas = ({ clubeInicial, temaInicial, voltarAoTema }) => 
         }
         const perguntas = temaInicial.perguntas.filter(pergunta => pergunta.cod !== perguntaId);
         temaInicial.perguntas = perguntas;
-        const temas = clubeInicial.temas.filter(tema => tema.cod !== temaInicial.cod);
-        temas.push(temaInicial);
+        const temas = clubeInicial.temas.map(tema => tema.cod === temaInicial.cod ? temaInicial : tema);
         const updatedClub= {
             cod: clubeInicial.cod,
             nome: clubeInicial.nome,

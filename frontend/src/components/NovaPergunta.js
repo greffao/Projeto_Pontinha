@@ -4,6 +4,7 @@ import axios from "axios";
 
 const NovaPergunta = ({ onVoltarClick, tema, clube }) => {
     const [questao, setQuestao] = useState('');
+    const [imagem, setImagem] = useState("");
     const [alternativas, setAlternativas] = useState(["", "", "", ""]);
     const { user } = useContext(AuthContext); // pegar usuário atual
 
@@ -17,16 +18,20 @@ const NovaPergunta = ({ onVoltarClick, tema, clube }) => {
         setAlternativas(newAlternativas);
     };
 
+    const handleImagemChange = (e) => {
+        setImagem(e.target.value);
+    };
+
     const handleCriarPergunta = () => {
         if (questao && alternativas.every(alternativa => alternativa)) {
             const novaPergunta = {
-               cod: tema.perguntas[-1].cod + 1, //Pegamos o codigo da ultima pergunta no bd
+               cod: tema.perguntas[tema.perguntas.length -1].cod + 1, //Pegamos o codigo da ultima pergunta no bd
                alternativa_a: alternativas[0],
                alternativa_b: alternativas[1],
                alternativa_c: alternativas[2],
                alternativa_d: alternativas[3],
                questao: questao,
-               imagem: ''
+               imagem: imagem
             };
 
             // Recuperar token do localStorage
@@ -86,7 +91,13 @@ const NovaPergunta = ({ onVoltarClick, tema, clube }) => {
                         className="input-clube"
                     />
                 ))}
-                
+                <input
+                    type="text"
+                    value={imagem}
+                    onChange={handleImagemChange}
+                    placeholder="Link da Imagem"
+                    className="input-clube"
+                />
                 <div className='botao-canto'>
                     <button onClick={onVoltarClick}>Cancelar</button>
                 </div>

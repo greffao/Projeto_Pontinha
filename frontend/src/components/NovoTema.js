@@ -3,29 +3,31 @@ import { Link, useNavigate } from "react-router-dom/dist";
 import axios from "axios";
 import { AuthContext } from "../context/auth";
 
-const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
-  const [nomeClube, setNomeClube] = useState("");
+const NovoTema = ({ onVoltarClick, clube }) => {
+  const [nomeTema, setNomeTema] = useState("");
   const [imagem, setImagem] = useState("");
+
   const navigate = useNavigate();
   const { user } = useContext(AuthContext); // pegar usuário atual
 
   const handleNomeChange = (e) => {
-    setNomeClube(e.target.value);
+    setNomeTema(e.target.value);
   };
 
   const handleImagemChange = (e) => {
     setImagem(e.target.value);
   };
 
-  //adicionando novo clube ao backend
-  const handleCriarClube = () => {
-    if (nomeClube) {
+  //adicionando novo tema ao backend
+  const handleCriarTema = () => {
+    debugger;
+    if (nomeTema) {
       // Verifica se o nome não está vazio
-      const novoClube = {
-        cod: clubes[clubes.length -1].cod + 1, // Atribui um novo ID baseado no comprimento do array
-        nome: nomeClube,
+      const novoTema = {
+        cod: clube.temas[clube.temas.length - 1].cod + 1, // Atribui um novo ID baseado no comprimento do array
+        nome: nomeTema,
         imagem: imagem,
-        temas: [], // Sem temas inicialmente
+        perguntas: [], // Sem perguntas inicialmente
       };
 
       // Recuperar token do localStorage
@@ -36,40 +38,42 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
         alert("Usuário não autenticado.");
         return;
       }
-
+      const temas = clube.temas;
+      temas.push(novoTema);
+      const updatedClub= {
+            cod: clube.cod,
+            nome: clube.nome,
+            imagem: clube.imagem,
+            temas: temas,
+        }
       axios
-        .post("http://localhost:4242/api/clube", novoClube, {
+      .put(`http://localhost:4242/api/clube/${clube.cod}`,updatedClub, {
           headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          }
-        })
-        .then((res) => {
-          console.log("Clube adicionado:", novoClube);
-          clubes.push(novoClube);
-          alert("Novo clube adicionado com sucesso!");
-          return res;
-        })
-        .catch((err) => {
-          alert(err);
-          return err;
-        });
-      setNomeClube(""); // Limpa o campo de entrada
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        }
+      })
+      .then((res) => {
+          console.log("Tema adicionado com sucesso:", res.data);
+      })
+      .catch((error) => console.error(error));
+      setNomeTema(""); // Limpa o campo de entrada
+      onVoltarClick();
       navigate("/gerenciamento");
     } else {
-      alert("Por favor, insira um nome para o clube."); // Alerta se o campo estiver vazio
+      alert("Por favor, insira um nome para o tema."); // Alerta se o campo estiver vazio
     }
   };
 
   return (
     <div className="home-container">
       <div className="quadrado">
-        <h1 className="titulo-clubes">Novo Clube</h1>
+        <h1 className="titulo-clubes">Novo Tema</h1>
         <input
           type="text"
-          value={nomeClube}
+          value={nomeTema}
           onChange={handleNomeChange}
-          placeholder="Nome do Clube"
+          placeholder="Nome do Tema"
           className="input-clube"
         />
         <input
@@ -81,15 +85,15 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
         />
         <Link to="/gerenciamento">
           <div className="botao-canto">
-            <button onClick={onEntrarClick}>Cancelar</button>
+            <button onClick={onVoltarClick}>Cancelar</button>
           </div>
         </Link>
         <div className="botao-nav">
-          <button onClick={handleCriarClube}>Criar Novo Clube</button>
+          <button onClick={handleCriarTema}>Criar Novo Tema</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default NovoClube;
+export default NovoTema;

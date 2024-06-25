@@ -5,9 +5,13 @@ import { AuthContext } from "../context/auth";
 
 const EditarPergunta = ({ onVoltarClick, pergunta, tema, clube }) => {
     const [questao, setQuestao] = useState('');
+    const [imagem, setImagem] = useState("");
     const [alternativas, setAlternativas] = useState([]);
     const { user } = useContext(AuthContext); // pegar usuário atual
 
+    const handleImagemChange = (e) => {
+        setImagem(e.target.value);
+    };
 
     // Asegurar que todos os dados estão carregados antes de usá-los
     useEffect(() => {
@@ -20,6 +24,7 @@ const EditarPergunta = ({ onVoltarClick, pergunta, tema, clube }) => {
                 pergunta.alternativa_d,
 
             ];
+            setImagem(pergunta.imagem);
             setAlternativas(alternativas);
         }
     }, [pergunta]);
@@ -43,7 +48,7 @@ const EditarPergunta = ({ onVoltarClick, pergunta, tema, clube }) => {
                alternativa_c: alternativas[2],
                alternativa_d: alternativas[3],
                questao: questao,
-               imagem: ''
+               imagem: imagem
             };
 
             // Recuperar token do localStorage
@@ -54,10 +59,8 @@ const EditarPergunta = ({ onVoltarClick, pergunta, tema, clube }) => {
                 alert("Usuário não autenticado.");
                 return;
             }
-            const perguntas = tema.perguntas.filter(pergunta => pergunta.cod !== perguntaId);
+            const perguntas = tema.perguntas.map(pergunta => pergunta.cod !== perguntaId ? updatedPergunta : pergunta);
             tema.perguntas = perguntas;
-            tema.perguntas.push(updatedPergunta)
-
             const updatedClub= {
                 cod: clube.cod,
                 nome: clube.nome,
@@ -93,6 +96,13 @@ const EditarPergunta = ({ onVoltarClick, pergunta, tema, clube }) => {
                     value={questao}
                     onChange={handleQuestaoChange}
                     placeholder="Digite a questão"
+                    className="input-clube"
+                />
+                <input
+                    type="text"
+                    value={imagem}
+                    onChange={handleImagemChange}
+                    placeholder="Link da Imagem"
                     className="input-clube"
                 />
                 {alternativas.map((alt, index) => (

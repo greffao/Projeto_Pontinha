@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import GerenciamentoTemas from "./GerenciamentoTemas";
 import { Link } from "react-router-dom/dist";
 import { AuthContext } from "../context/auth";
@@ -45,7 +45,6 @@ const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes }) => {
 
   // essa é uma boa parte para refatorar com routers talvez
   if (clubeSelecionado) {
-    console.log(clubeSelecionado);
     return (
       <GerenciamentoTemas
         clubeInicial={clubeSelecionado}
