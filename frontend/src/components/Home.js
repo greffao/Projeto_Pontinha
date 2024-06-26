@@ -16,6 +16,9 @@ const Home = () => {
                     <Link to="/quem-somos">
                         <button>Quem somos</button>
                     </Link>
+                    <Link to="/creditos">
+                        <button>Créditos</button>
+                    </Link>
                 </div>
                 <div className='botao-canto'>
                     <Link to="/area-coordenacao">

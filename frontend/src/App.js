@@ -2,6 +2,7 @@ import Titulo from "./components/Titulo";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
 import QuemSomos from "./components/QuemSomos";
+import Creditos from "./components/Creditos"
 import Jogo from "./components/Jogo";
 import AreaCoordenacao from "./components/AreaCoordenacao";
 import GerenciamentoCoordenadores from "./components/GerenciamentoCoordenadores";
@@ -59,6 +60,7 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route path="/jogo" element={<Jogo clubes={clubes} />} />
             <Route path="/quem-somos" element={<QuemSomos />} />
+            <Route path="/creditos" element={<Creditos />} />
             <Route path="/area-coordenacao" element={<AreaCoordenacao />} />
 
             <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
