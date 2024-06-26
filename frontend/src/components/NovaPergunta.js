@@ -24,8 +24,9 @@ const NovaPergunta = ({ onVoltarClick, tema, clube }) => {
 
     const handleCriarPergunta = () => {
         if (questao && alternativas.every(alternativa => alternativa)) {
+            console.log(tema.perguntas);
             const novaPergunta = {
-               cod: tema.perguntas[tema.perguntas.length -1].cod + 1, //Pegamos o codigo da ultima pergunta no bd
+               cod: tema.perguntas.length > 0 ? tema.perguntas[tema.perguntas.length - 1].cod + 1 : 1, //Pegamos o codigo da ultima pergunta no bd
                alternativa_a: alternativas[0],
                alternativa_b: alternativas[1],
                alternativa_c: alternativas[2],

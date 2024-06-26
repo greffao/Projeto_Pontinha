@@ -24,7 +24,7 @@ const NovoTema = ({ onVoltarClick, clube }) => {
     if (nomeTema) {
       // Verifica se o nome não está vazio
       const novoTema = {
-        cod: clube.temas[clube.temas.length - 1].cod + 1, // Atribui um novo ID baseado no comprimento do array
+        cod: clube.temas.length > 0 ? clube.temas[clube.temas.length - 1].cod + 1 : 1,  // Atribui um novo ID baseado no comprimento do array
         nome: nomeTema,
         imagem: imagem,
         perguntas: [], // Sem perguntas inicialmente
