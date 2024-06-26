@@ -6,8 +6,6 @@ Felipi Yuri Santos - 11917292 <br>
 Felipe Scholucha Martinez Roldan - 13671873 <br>
 Vinicius Carneiro Macedo - 11915752 <br>
 Vitor Hugo Almeida Couto - 13672787 <br>
-Yuri Fernandes Pereira - 13730127 <br>
-
 *Instituto de Ciências Matemáticas e de Computação* <br>
 *Universidade de São Paulo* <br>
 
