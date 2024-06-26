@@ -40,6 +40,7 @@ const EditarPergunta = ({ onVoltarClick, pergunta, tema, clube }) => {
     };
 
     const alterarPergunta = (perguntaId) => {
+        debugger;
         if (questao && alternativas.every(alternativa => alternativa)) {
             const updatedPergunta = {
                cod: perguntaId,
@@ -59,7 +60,7 @@ const EditarPergunta = ({ onVoltarClick, pergunta, tema, clube }) => {
                 alert("Usuário não autenticado.");
                 return;
             }
-            const perguntas = tema.perguntas.map(pergunta => pergunta.cod !== perguntaId ? updatedPergunta : pergunta);
+            const perguntas = tema.perguntas.map(pergunta => pergunta.cod === perguntaId ? updatedPergunta : pergunta);
             tema.perguntas = perguntas;
             const updatedClub= {
                 cod: clube.cod,
