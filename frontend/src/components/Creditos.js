@@ -6,7 +6,7 @@ const QuemSomos = () => {
             <div className='quadrado'>
                 <h1>Créditos</h1>
                 <p>
-                O website foi desenvolvido por estes alunos do curso Bacharelado em Ciências de Computação do
+                O website foi desenvolvido em 2024 por estes alunos do curso Bacharelado em Ciências de Computação do
                 Instituo de Ciências Matemáticas e de Computação da Universidade de São Paulo, em São Carlos (ICMC-USP):
                 </p>
                 <ul>
