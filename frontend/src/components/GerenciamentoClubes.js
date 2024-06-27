@@ -1,16 +1,19 @@
 import { useState, useContext } from "react";
 import GerenciamentoTemas from "./GerenciamentoTemas";
-import { Link } from "react-router-dom/dist";
+import EditarClube from "./EditarClube";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth";
 import axios from "axios";
 
-const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes }) => {
+const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes, setClubes }) => {
   const [clubesLocais, setClubesLocais] = useState(clubes);
   const [clubeSelecionado, setClubeSelecionado] = useState(null);
+  const [modoEditarClube, setModoEditarClube] = useState(false);
   const { user } = useContext(AuthContext); // pegar usuário atual
 
-  const handleSelecionarClube = (clube) => {
+  const handleSelecionarClube = (clube, modoEditar) => {
     setClubeSelecionado(clube);
+    setModoEditarClube(modoEditar);
   };
 
   const excluirClube = (clubeId) => {
@@ -38,18 +41,37 @@ const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes }) => {
       })
       .then((res) => {
         console.log("Clube excluído com sucesso:", res.data);
-        setClubesLocais(clubesLocais.filter((clube) => clube.cod !== clubeId));
+        const clubesAtualizados = clubesLocais.filter((clube) => clube.cod !== clubeId);
+        setClubesLocais(clubesAtualizados);
+        setClubes(clubesAtualizados); // Atualiza o estado do App
       })
       .catch((error) => console.error(error));
   };
 
-  // essa é uma boa parte para refatorar com routers talvez
-  if (clubeSelecionado) {
+  const atualizarClube = (clubeEditado) => {
+    const clubesAtualizados = clubesLocais.map(clube => 
+      clube.cod === clubeEditado.cod ? clubeEditado : clube
+    );
+    setClubesLocais(clubesAtualizados);
+    setClubes(clubesAtualizados); // Atualiza o estado do App
+  };
+
+  if (clubeSelecionado && modoEditarClube) {
+    return (
+      <EditarClube
+        clube={clubeSelecionado}
+        onVoltarClick={() => setClubeSelecionado(null)}
+        atualizarClube={atualizarClube} // Passa a função para atualizar o clube
+      />
+    );
+  }
+
+  if (clubeSelecionado && !modoEditarClube) {
     return (
       <GerenciamentoTemas
         clubeInicial={clubeSelecionado}
         clubes={clubesLocais}
-        setClubes={setClubesLocais}
+        setClubes={setClubes}
         voltarAoClube={() => setClubeSelecionado(null)}
       />
     );
@@ -63,14 +85,20 @@ const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes }) => {
           {clubesLocais.map((clube) => (
             <div key={clube.cod} className="clube-container">
               <span>
-                {clube.emoji} {clube.nome}
+                {clube.cod} {clube.nome}
               </span>
               <div>
                 <button
                   style={{ marginRight: "15px" }}
-                  onClick={() => handleSelecionarClube(clube)}
+                  onClick={() => handleSelecionarClube(clube, true)}
                 >
                   Editar
+                </button>
+                <button
+                  style={{ marginRight: "15px" }}
+                  onClick={() => handleSelecionarClube(clube, false)}
+                >
+                  Editar Temas
                 </button>
                 <button onClick={() => excluirClube(clube.cod)}>Excluir</button>
               </div>

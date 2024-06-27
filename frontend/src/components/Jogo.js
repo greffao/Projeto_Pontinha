@@ -14,6 +14,7 @@ const Jogo = ({ onVoltarClick, clubes }) => {
 
     const perguntaRef = useRef(null);
     const imagemRef = useRef(null);
+    const alternativasRefs = useRef([]);
 
     useEffect(() => {
         if (temaSelecionado && temaSelecionado.perguntas[perguntaAtual]) {
@@ -29,12 +30,24 @@ const Jogo = ({ onVoltarClick, clubes }) => {
 
     const adjustFontSize = () => {
         if (perguntaRef.current) {
-            let fontSize = 30;
+            let fontSize = 26;
             perguntaRef.current.style.fontSize = `${fontSize}px`;
             while (perguntaRef.current.scrollHeight > perguntaRef.current.clientHeight && fontSize > 1) {
                 fontSize -= 1;
                 perguntaRef.current.style.fontSize = `${fontSize}px`;
             }
+        }
+        if (alternativasRefs.current) {
+            alternativasRefs.current.forEach((altRef) => {
+                if (altRef) {
+                    let fontSize = 20;
+                    altRef.style.fontSize = `${fontSize}px`;
+                    while (altRef.scrollHeight > altRef.clientHeight && fontSize > 1) {
+                        fontSize -= 1;
+                        altRef.style.fontSize = `${fontSize}px`;
+                    }
+                }
+            });
         }
     };
 
@@ -65,7 +78,6 @@ const Jogo = ({ onVoltarClick, clubes }) => {
             temaSelecionado.perguntas[perguntaAtual].alternativa_b,
             temaSelecionado.perguntas[perguntaAtual].alternativa_c,
             temaSelecionado.perguntas[perguntaAtual].alternativa_d,
-
         ];
 
         for (let i = alternativasEmbaralhadas.length - 1; i > 0; i--) {
@@ -109,7 +121,7 @@ const Jogo = ({ onVoltarClick, clubes }) => {
                         <div className='clubes'>
                             {clubes.map(clube => (
                                 <button key={clube.id} className='botao-clube' onClick={() => setClubeSelecionado(clube)}>
-                                    <img src={clube.imagem} alt={clube.nome} />
+                                    {clube.imagem && (<img src={clube.imagem} alt={clube.nome} />)}
                                     <span>{clube.nome}</span>
                                 </button>
                             ))}
@@ -129,7 +141,7 @@ const Jogo = ({ onVoltarClick, clubes }) => {
                         <div className='clubes'>
                             {clubeSelecionado.temas.map((tema, index) => (
                                 <button key={index} className='botao-tema' onClick={() => handleTemaSelecionado(tema)}>
-                                    <img src={tema.imagem} alt={tema.nome} />
+                                    {tema.imagem && (<img src={tema.imagem} alt={tema.nome} />)}
                                     <span>{tema.nome}</span>
                                 </button>
                             ))}
@@ -138,17 +150,20 @@ const Jogo = ({ onVoltarClick, clubes }) => {
                     <div className='botao-canto'>
                         <button onClick={() => { setClubeSelecionado(null); resetJogo(); }}>Voltar</button>
                     </div>
-                </>
+                    </>
                 ) : !(perguntaAtual === temaSelecionado.perguntas.length) ?(
                     <>
                     <div className='clubes-container'>
                         <h2>{temaSelecionado.nome}</h2>
                         <p className='perguntas' ref={perguntaRef}>{temaSelecionado.perguntas[perguntaAtual].questao}</p>
-                        <img className='imagem-quadrada' onLoad={adjustImageHeight} src={temaSelecionado.perguntas[perguntaAtual].imagem} alt="Question Image" />
+                        {temaSelecionado.perguntas[perguntaAtual].imagem && (
+                            <img className='imagem-quadrada' onLoad={adjustImageHeight} src={temaSelecionado.perguntas[perguntaAtual].imagem} alt="Question Image" ref={imagemRef} />
+                        )}
                         <div className='alternativas'>
                         {alternativasEmbaralhadas.map((alt, index) => (
                             <button 
-                                key={index} 
+                                key={index}
+                                ref={el => alternativasRefs.current[index] = el}
                                 onClick={() => handleAlternativaClick(alt, index)} 
                                 disabled={alternativaCorreta !== -1 || alternativaIncorreta !== -1}
                                 style={{ 

@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom/dist";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth";
 
-const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
+const NovoClube = ({ onVoltarClick, onEntrarClick, clubes, setClubes }) => {
   const [nomeClube, setNomeClube] = useState("");
   const [imagem, setImagem] = useState("");
   const navigate = useNavigate();
@@ -17,12 +17,12 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
     setImagem(e.target.value);
   };
 
-  //adicionando novo clube ao backend
+  // adicionando novo clube ao backend
   const handleCriarClube = () => {
     if (nomeClube) {
       // Verifica se o nome não está vazio
       const novoClube = {
-        cod: clubes.length > 0 ? clubes[clubes.length -1].cod + 1 : 1,  // Atribui um novo ID baseado no comprimento do array
+        cod: clubes.length > 0 ? clubes[clubes.length - 1].cod + 1 : 1, // Atribui um novo ID baseado no comprimento do array
         nome: nomeClube,
         imagem: imagem,
         temas: [], // Sem temas inicialmente
@@ -32,7 +32,7 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
       const token = user?.token || localStorage.getItem("user")?.token;
 
       // Verificar se token está disponível
-      if(!token) {
+      if (!token) {
         alert("Usuário não autenticado.");
         return;
       }
@@ -46,7 +46,8 @@ const NovoClube = ({ onVoltarClick, onEntrarClick, clubes }) => {
         })
         .then((res) => {
           console.log("Clube adicionado:", novoClube);
-          clubes.push(novoClube);
+          const clubesAtualizados = [...clubes, novoClube];
+          setClubes(clubesAtualizados); // Atualiza o estado do App
           alert("Novo clube adicionado com sucesso!");
           return res;
         })

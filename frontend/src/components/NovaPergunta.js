@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { AuthContext } from "../context/auth";
 import axios from "axios";
 
-const NovaPergunta = ({ onVoltarClick, tema, clube }) => {
+const NovaPergunta = ({ onVoltarClick, tema, clube, atualizarPerguntas }) => {
     const [questao, setQuestao] = useState('');
     const [imagem, setImagem] = useState("");
     const [alternativas, setAlternativas] = useState(["", "", "", ""]);
@@ -24,44 +24,44 @@ const NovaPergunta = ({ onVoltarClick, tema, clube }) => {
 
     const handleCriarPergunta = () => {
         if (questao && alternativas.every(alternativa => alternativa)) {
-            console.log(tema.perguntas);
             const novaPergunta = {
-               cod: tema.perguntas.length > 0 ? tema.perguntas[tema.perguntas.length - 1].cod + 1 : 1, //Pegamos o codigo da ultima pergunta no bd
-               alternativa_a: alternativas[0],
-               alternativa_b: alternativas[1],
-               alternativa_c: alternativas[2],
-               alternativa_d: alternativas[3],
-               questao: questao,
-               imagem: imagem
+                cod: tema.perguntas.length > 0 ? tema.perguntas[tema.perguntas.length - 1].cod + 1 : 1, //Pegamos o codigo da ultima pergunta no bd
+                alternativa_a: alternativas[0],
+                alternativa_b: alternativas[1],
+                alternativa_c: alternativas[2],
+                alternativa_d: alternativas[3],
+                questao: questao,
+                imagem: imagem
             };
 
             // Recuperar token do localStorage
             const token = user?.token || localStorage.getItem("user")?.token;
 
             // Verificar se token está disponível
-            if(!token) {
+            if (!token) {
                 alert("Usuário não autenticado.");
                 return;
             }
 
-            tema.perguntas.push(novaPergunta);
-            const updatedClub= {
+            const novasPerguntas = [...tema.perguntas, novaPergunta];
+            const updatedClub = {
                 cod: clube.cod,
                 nome: clube.nome,
                 imagem: clube.imagem,
-                temas: tema,
+                temas: { ...tema, perguntas: novasPerguntas },
             }
             axios
-            .put(`http://localhost:4242/api/clube/${clube.cod}`,updatedClub, {
-                headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            }
-            })
-            .then((res) => {
-                console.log("Pergunta criada com sucesso:", res.data);
-            })
-            .catch((error) => console.error(error));
+                .put(`http://localhost:4242/api/clube/${clube.cod}`, updatedClub, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then((res) => {
+                    console.log("Pergunta criada com sucesso:", res.data);
+                    atualizarPerguntas(novasPerguntas); // Atualiza o estado no componente pai
+                })
+                .catch((error) => console.error(error));
             setQuestao('');
             setAlternativas(["", "", "", ""]);
             onVoltarClick();
@@ -69,7 +69,7 @@ const NovaPergunta = ({ onVoltarClick, tema, clube }) => {
             alert('Por favor, insira uma questão e todas as alternativas.');
         }
     };
-//TODO: adicionar o iput da imagem
+
     return (
         <div className='home-container'>
             <div className='quadrado'>

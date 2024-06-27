@@ -17,6 +17,7 @@ import {
 } from "react-router-dom";
 import GerenciamentoClubes from "./components/GerenciamentoClubes";
 import NovoClube from "./components/NovoClube";
+import EditarClube from "./components/EditarClube";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -64,28 +65,33 @@ function App() {
             <Route path="/area-coordenacao" element={<AreaCoordenacao />} />
 
             <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
-              <Route
-                path="/gerenciamento"
-                element={<GerenciamentoClubes clubes={clubes} />}
+            <Route
+              path="/gerenciamento"
+              element={<GerenciamentoClubes clubes={clubes} setClubes={setClubes} />}
+              exact
+            />
+            <Route
+              path="/novo-clube"
+              element={<NovoClube clubes={clubes} setClubes={setClubes} />}
+              exact
+            />
+            <Route
+                path="/editar-clube/:clubeId"
+                element={<EditarClube clubes={clubes} setClubes={setClubes} />}
                 exact
               />
-              <Route
-                path="/novo-clube"
-                element={<NovoClube clubes={clubes} />}
-                exact
-              />
-              <Route
-                path="/gerenciamento-coordenadores"
-                element={
-                  <GerenciamentoCoordenadores />
-                }
-                exact
-              />
-              <Route
-                path="/novo-coordenador"
-                element={<NovoCoordenador />}
-                exact
-              />
+            <Route
+              path="/gerenciamento-coordenadores"
+              element={
+                <GerenciamentoCoordenadores />
+              }
+              exact
+            />
+            <Route
+              path="/novo-coordenador"
+              element={<NovoCoordenador />}
+              exact
+            />
             </Route>
           </Routes>
         </div>

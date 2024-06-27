@@ -20,7 +20,6 @@ const NovoTema = ({ onVoltarClick, clube }) => {
 
   //adicionando novo tema ao backend
   const handleCriarTema = () => {
-    debugger;
     if (nomeTema) {
       // Verifica se o nome não está vazio
       const novoTema = {
