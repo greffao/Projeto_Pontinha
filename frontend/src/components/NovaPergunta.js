@@ -8,6 +8,9 @@ const NovaPergunta = ({ onVoltarClick, tema, clube, atualizarPerguntas }) => {
     const [alternativas, setAlternativas] = useState(["", "", "", ""]);
     const { user } = useContext(AuthContext); // pegar usuário atual
 
+    console.log(tema);
+    console.log(clube);
+
     const handleQuestaoChange = (e) => {
         setQuestao(e.target.value);
     };
@@ -43,12 +46,16 @@ const NovaPergunta = ({ onVoltarClick, tema, clube, atualizarPerguntas }) => {
                 return;
             }
 
+            debugger;
             const novasPerguntas = [...tema.perguntas, novaPergunta];
             const updatedClub = {
                 cod: clube.cod,
                 nome: clube.nome,
                 imagem: clube.imagem,
-                temas: { ...tema, perguntas: novasPerguntas },
+                temas: clube.temas.map(t => ({
+                    ...t,
+                    perguntas: t === tema ? novasPerguntas : t.perguntas
+                })),
             }
             axios
                 .put(`http://localhost:4242/api/clube/${clube.cod}`, updatedClub, {
