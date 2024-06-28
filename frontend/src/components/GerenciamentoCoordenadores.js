@@ -32,6 +32,16 @@ const GerenciamentoCoordenadores = ({ onVoltarClick, onNovoCoordenador}) => {
     }, []);
 
     const excluirCoordenador = (coordenadorLogin) => {
+        if(coordenadorLogin == "admin") {
+            alert("Root admin não pode ser excluído.");
+            return;
+        }
+
+        if(coordenadorLogin == user.username){
+            alert("Você não pode se excluir!");
+            return;
+        }
+
         // Verificar se token está disponível
         if(!token) {
             alert("Usuário não autenticado.");
