@@ -85,7 +85,7 @@ const GerenciamentoClubes = ({ onVoltarClick, onNovoClube, clubes, setClubes }) 
           {clubesLocais.map((clube) => (
             <div key={clube.cod} className="clube-container">
               <span>
-                {clube.cod} {clube.nome}
+                {clube.nome}
               </span>
               <div>
                 <button

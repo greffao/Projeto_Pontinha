@@ -6,6 +6,7 @@ import axios from "axios";
 const NovoCoordenador = ({ adicionarCoordenador }) => {
     const [login, setLogin] = useState('');
     const [senha, setSenha] = useState('');
+    const [senhaConfirmada, setSenhaConfirmada] = useState('');
     const { user } = useContext(AuthContext); // pegar usuário atual
     const navigate = useNavigate();
     const location = useLocation();
@@ -22,8 +23,54 @@ const NovoCoordenador = ({ adicionarCoordenador }) => {
         navigate("/gerenciamento-coordenadores");
     }
 
+    const handleSenhaConfirmadaChange = (e) => {
+        setSenhaConfirmada(e.target.value);
+    };
+
+    const validarSenha = (senha) => {
+        // Critérios de validação de senha
+        if (senha.length < 8) {
+            return false; // Senha precisa ter pelo menos 8 caracteres
+        }
+    
+        // Verifica se há pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial
+        const regexMaiuscula = /[A-Z]/;
+        const regexMinuscula = /[a-z]/;
+        const regexNumero = /[0-9]/;
+        const regexEspecial = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/; // Exemplo de caracteres especiais, você pode ajustar conforme necessário
+    
+        if (!regexMaiuscula.test(senha)) {
+            return false; // Senha precisa conter pelo menos uma letra maiúscula
+        }
+    
+        if (!regexMinuscula.test(senha)) {
+            return false; // Senha precisa conter pelo menos uma letra minúscula
+        }
+    
+        if (!regexNumero.test(senha)) {
+            return false; // Senha precisa conter pelo menos um número
+        }
+    
+        if (!regexEspecial.test(senha)) {
+            return false; // Senha precisa conter pelo menos um caractere especial
+        }
+    
+        return true; // A senha atende a todos os critérios
+    };
+    
+
     const handleCriarCoordenador = () => {
         if (login && senha) { // Verifica se ambos login e senha não estão vazios
+            if (!validarSenha(senha)) {
+                alert('A senha deve conter pelo menos 8 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial.'); // Mensagem com os requisitos da senha
+                return;
+            }
+
+            if(senha != senhaConfirmada) {
+                alert('Digite a mesma senha duas vezes!');
+                return;
+            }
+
             const novoCoordenador = {
                 // id: coordenadores.length + 1, // Atribui um novo ID baseado no comprimento do array
                 login: login,
@@ -87,6 +134,13 @@ const NovoCoordenador = ({ adicionarCoordenador }) => {
                     value={senha}
                     onChange={handleSenhaChange}
                     placeholder="Senha do Coordenador"
+                    className="input-coordenador"
+                />
+                <input
+                    type="password"
+                    value={senhaConfirmada}
+                    onChange={handleSenhaConfirmadaChange}
+                    placeholder="Confirme sua senha"
                     className="input-coordenador"
                 />
                 <Link to='/gerenciamento-coordenadores'>

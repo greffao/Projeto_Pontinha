@@ -88,6 +88,7 @@ const NovaPergunta = ({ onVoltarClick, tema, clube, atualizarPerguntas }) => {
                     onChange={handleQuestaoChange}
                     placeholder="Digite a questão"
                     className="input-clube"
+                    maxLength={450}
                 />
                 {alternativas.map((alt, index) => (
                     <input
@@ -97,6 +98,7 @@ const NovaPergunta = ({ onVoltarClick, tema, clube, atualizarPerguntas }) => {
                         onChange={(e) => handleAlternativaChange(index, e.target.value)}
                         placeholder={`Alternativa ${index + 1}`}
                         className="input-clube"
+                        maxLength={70}
                     />
                 ))}
                 <input

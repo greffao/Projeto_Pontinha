@@ -69,7 +69,9 @@ const Jogo = ({ onVoltarClick, clubes }) => {
 
             setAlternativaCorreta(-1);
             setAlternativaIncorreta(-1);
-        } else setPerguntaAtual(temaSelecionado.perguntas.length);
+        } else{
+            alert('Responda a pergunta atual antes de prosseguir!');
+        };
     };
 
     const shuffleAlternativas = () => {
@@ -88,6 +90,10 @@ const Jogo = ({ onVoltarClick, clubes }) => {
     };
 
     const handleTemaSelecionado = (tema) => {
+        if(tema.perguntas.length == 0){
+            alert('Este tema não tem perguntas!');
+            return;
+        }
         setTemaSelecionado(tema);
         const primeirasAlternativas = tema.perguntas.map((pergunta) => pergunta.alternativa_a);
         setPrimeirasAlternativasCorretas(primeirasAlternativas);
